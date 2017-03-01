@@ -1,0 +1,17 @@
+<div class="jumbotron">
+  <h2>Yelp Testing Area!</h2>
+</div>
+
+<%= form_for @conn, yelp_path(@conn, :index), [as: :search], fn f -> %>
+
+  <label>
+    Latitude: <%= number_input f, :latitude %>
+  </label>
+
+  <label>
+    Longitude: <%= number_input f, :longitude %>
+  </label>
+
+  <%= submit "Search" %>
+
+<% end %>

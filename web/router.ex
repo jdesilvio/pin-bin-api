@@ -17,6 +17,8 @@ defmodule Blaces.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/yelp", YelpController, :index
+    post "/yelp", YelpController, :index
   end
 
   # Other scopes may use custom stacks.
