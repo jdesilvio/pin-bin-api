@@ -21,8 +21,10 @@ defmodule Blaces.Router do
     post "/yelp", YelpController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Blaces do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", Blaces do
+    pipe_through :api
+
+    get "/yelp", YelpController, :index
+    post "/yelp", YelpController, :index
+  end
 end
