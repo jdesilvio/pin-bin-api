@@ -15,3 +15,10 @@
   <%= submit "Search" %>
 
 <% end %>
+
+<div class="jumbotron">
+  <%= @conn.params["search"]["latitude"] %>
+  <%= @conn.params["search"]["longitude"] %>
+  <%= @yelp %>
+</div>
+
