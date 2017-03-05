@@ -17,8 +17,16 @@
 <% end %>
 
 <div class="jumbotron">
-  <%= @conn.params["search"]["latitude"] %>
-  <%= @conn.params["search"]["longitude"] %>
-  <%= @yelp %>
+  <h3>Search Parameters</h3>
+  <p>Latitude: <%= @conn.params["search"]["latitude"] %></p>
+  <p>Longitude: <%= @conn.params["search"]["longitude"] %></p>
+
+  <h3>First Result</h3>
+  <p><%= @yelp
+         |> Poison.decode!
+         |> Map.get("businesses")
+         |> List.first
+         |> inspect %>
+  </p>
 </div>
 

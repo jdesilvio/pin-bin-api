@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Blaces!</title>
+    <title>Blaces</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -16,10 +16,13 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+            <li><a href="https://github.com/jdesilvio/blaces">Source on GitHub</a></li>
+            <li><a href="https://github.com/jdesilvio/blaces">Sign Up</a></li>
+            <li><a href="https://github.com/jdesilvio/blaces">Log In</a></li>
+            <li><a href="https://github.com/jdesilvio/blaces">Log Out</a></li>
           </ul>
         </nav>
-        <span class="logo"></span>
+        <h1>Blaces</h1>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
