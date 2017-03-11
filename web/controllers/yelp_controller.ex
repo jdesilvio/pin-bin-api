@@ -3,6 +3,7 @@ defmodule Blaces.YelpController do
 
   def index(conn, params) do
     IO.inspect params
+    IO.inspect conn
     case conn.request_path do
       "/yelp" -> conn
                  |> assign(:yelp, yelp_search!(params["search"]))
