@@ -16,6 +16,7 @@ defmodule Blaces.User do
     struct
     |> cast(params, [:email, :username, :password_hash])
     |> validate_required([:email, :username, :password_hash])
-    |> unique_constraint([:user_email_index, :user_username_index])
+    |> unique_constraint(:user_email_index)
+    |> unique_constraint(:user_username_index)
   end
 end
