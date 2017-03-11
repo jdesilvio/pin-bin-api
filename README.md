@@ -16,3 +16,10 @@ What I wanted was **a simple system for filing away place of interest AND a smar
     * Alert settings
     * Account settings
 
+### Notes:
+
+API Example:
+    http://localhost:4000/api/v1/yelp?latitude=40&longitude=-75
+
+Browser Example:
+    http://localhost:4000/yelp
