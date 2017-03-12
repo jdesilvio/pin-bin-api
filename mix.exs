@@ -36,7 +36,8 @@ defmodule Blaces.Mixfile do
      # Other deps
      {:yelp_ex, "~> 0.1.2"},
      {:poison, ">= 0.0.0", override: true},  # Workaround for YelpEx/Phoenix dep conflict
-     {:comeonin, "~> 3.0"}]
+     {:comeonin, "~> 3.0"},
+     {:guardian, "~> 0.14"}]
   end
 
   defp aliases do
