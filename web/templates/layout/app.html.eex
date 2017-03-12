@@ -18,8 +18,7 @@
           <ul class="nav nav-pills pull-right">
             <li><a href="https://github.com/jdesilvio/blaces">Source on GitHub</a></li>
             <li><%= link "Register", to: user_path(@conn, :new) %></li>
-            <li><a href="https://github.com/jdesilvio/blaces">Log In</a></li>
-            <li><a href="https://github.com/jdesilvio/blaces">Log Out</a></li>
+            <li><%= link "Sign In", to: session_path(@conn, :new) %></li>
           </ul>
         </nav>
         <h1>Blaces</h1>

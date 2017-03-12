@@ -17,6 +17,7 @@ defmodule Blaces.Router do
     post "/yelp", YelpController, :index
 
     resources "/users", UserController, only: [:show, :new, :create]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   pipeline :api do
