@@ -1,7 +1,7 @@
 defmodule Blaces.User do
   use Blaces.Web, :model
 
-  @required_fields ~w(email username password_hash)a
+  @required_fields ~w(email username)a
   @optional_fields ~w()a
 
   schema "users" do
@@ -23,4 +23,29 @@ defmodule Blaces.User do
     |> unique_constraint(:user_email_index)
     |> unique_constraint(:user_username_index)
   end
+
+  @doc """
+  Enforces registration logic on changeset.
+  """
+  def registration_changeset(struct, params) do
+    struct
+    |> changeset(params)
+    |> cast(params, ~w(password)a, [])
+    |> validate_length(:password, min: 6, max: 100)
+    |> hash_password
+  end
+
+  defp hash_password(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true,
+                      changes: %{password: password}} ->
+        put_change(changeset,
+                   :password_hash,
+                   Comeonin.Bcrypt.hashpwsalt(password))
+
+      _ ->
+        changeset
+    end
+  end
+
 end

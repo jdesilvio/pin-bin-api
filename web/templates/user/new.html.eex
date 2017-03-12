@@ -15,9 +15,9 @@
   </div>
 
   <div class="form-group">
-    <%= text_input f, :name, placeholder: "Name",
+    <%= text_input f, :username, placeholder: "Name",
                              class: "form-control" %>
-    <%= error_tag f, :name %>
+    <%= error_tag f, :username %>
   </div>
 
   <div class="form-group">
