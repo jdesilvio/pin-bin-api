@@ -21,6 +21,7 @@ defmodule Blaces.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
+        |> Blaces.Auth.login(user)
         |> put_flash(:info, "#{user.username} created!")
         |> redirect(to: user_path(conn, :show, user))
 

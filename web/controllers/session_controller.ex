@@ -1,10 +1,6 @@
 defmodule Blaces.SessionController do
   use Blaces.Web, :controller
 
-  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-
-  alias Blaces.User
-
   plug :scrub_params, "session" when action in ~w(create)a
 
   def new(conn, _) do
@@ -12,23 +8,10 @@ defmodule Blaces.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
-    user = Repo.get_by(User, email: email)
-
-    result = cond do
-      user && checkpw(password, user.password_hash) ->
-        {:ok, login(conn, user)}
-      user ->
-        {:error, :unauthorized, conn}
-      true ->
-        # simulate check password hash timing
-        dummy_checkpw
-        {:error, :not_found, conn}
-    end
-
-    case result do
+    case Blaces.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         conn
-        |> put_flash(:info, "You’re now logged in!")
+        |> put_flash(:info, "You’re now signed in!")
         |> redirect(to: page_path(conn, :index))
       {:error, _reason, conn} ->
         conn
@@ -37,14 +20,9 @@ defmodule Blaces.SessionController do
     end
   end
 
-  defp login(conn, user) do
-    conn
-    |> Guardian.Plug.sign_in(user)
-  end
-
   def delete(conn, _) do
     conn
-    |> logout
+    |> Blaces.Auth.logout
     |> put_flash(:info, "See you later!")
     |> redirect(to: page_path(conn, :index))
   end
