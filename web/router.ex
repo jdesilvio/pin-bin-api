@@ -10,7 +10,7 @@ defmodule Blaces.Router do
   end
 
   scope "/", Blaces do
-    pipe_through :browser
+    pipe_through [:browser, :with_session]
 
     get "/", PageController, :index
     get "/yelp", YelpController, :index
@@ -30,4 +30,11 @@ defmodule Blaces.Router do
     get "/yelp", YelpController, :index
     post "/yelp", YelpController, :index
   end
+
+  pipeline :with_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug Blaces.CurrentUser
+  end
+
 end
