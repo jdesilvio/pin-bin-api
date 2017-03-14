@@ -1,7 +1,7 @@
 defmodule Blaces.Bucket do
   use Blaces.Web, :model
 
-  @required_fields ~w(name)a
+  @required_fields ~w(name short_name)a
   @optional_fields ~w()a
 
   schema "buckets" do
