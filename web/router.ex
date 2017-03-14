@@ -13,6 +13,7 @@ defmodule Blaces.Router do
     pipe_through [:browser, :with_session]
 
     get "/", PageController, :index
+    get "/elm", ElmController, :index
     resources "/users", UserController, only: [:new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
