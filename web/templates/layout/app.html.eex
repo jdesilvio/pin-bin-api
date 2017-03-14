@@ -14,21 +14,30 @@
   <body>
     <div class="container">
       <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
+
+          <ol class="breadcrumb text-right">
             <%= if @current_user do %>
-              <li id=current-user><%= @current_user.email %> (<%= @current_user.id %>)</li>
-              <li id="sign-out-link">
-                <%= link "Sign Out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+              <li>
+                <%= @current_user.email %> (<%= @current_user.id %>)
+              </li>
+              <li>
+                <%= link "My Buckets", to: user_bucket_path(@conn, :index, @current_user) %>
+              </li>
+              <li>
+                <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
               </li>
             <% else %>
               <li><%= link "Register", to: user_path(@conn, :new) %></li>
-              <li><%= link "Sign In", to: session_path(@conn, :new) %></li>
+              <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
             <% end %>
-            <li><a href="https://github.com/jdesilvio/blaces">Source on GitHub</a></li>
+          </ol>
+
           </ul>
+
         </nav>
+
         <h1>Blaces</h1>
+
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -37,6 +46,14 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
+
+      <footer id="footer">
+        <div class="container">
+          <p class="muted credit">
+            <a href="https://github.com/jdesilvio/blaces">Source on GitHub</a>
+          </p>
+        </div>
+      </footer>
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
