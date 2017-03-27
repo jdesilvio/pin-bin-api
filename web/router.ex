@@ -35,10 +35,22 @@ defmodule Blaces.Router do
   end
 
   scope "/api/v1", Blaces do
-    pipe_through :api
+    pipe_through [:api]
 
     get "/yelp", YelpController, :index
     post "/yelp", YelpController, :index
+
+    resources "/users", UserController, only: [:new, :create]
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
+
+    # Authenticated user
+    scope "/"  do
+      pipe_through [:api_auth]
+
+      resources "/users", UserController, only: [:show] do
+        resources "/buckets", BucketController
+      end
+    end
   end
 
   pipeline :with_session do
@@ -50,6 +62,12 @@ defmodule Blaces.Router do
   pipeline :login_required do
     plug Guardian.Plug.EnsureAuthenticated,
          handler: Blaces.GuardianErrorHandler
+  end
+
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+    plug Blaces.InspectConn #TODO remove <<<
   end
 
 end
