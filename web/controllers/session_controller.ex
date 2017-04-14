@@ -27,8 +27,4 @@ defmodule Blaces.SessionController do
     |> redirect(to: page_path(conn, :index))
   end
 
-  defp logout(conn) do
-    Guardian.Plug.sign_out(conn)
-  end
-
 end

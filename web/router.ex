@@ -34,8 +34,8 @@ defmodule Blaces.Router do
     post "/yelp", YelpController, :index
 
     resources "/users", UserController, only: [:new, :create]
-    get "/auth", AuthController, :login
-    post "/auth", AuthController, :login
+
+    get "/auth", AuthController, :show
 
     # Authenticated user
     scope "/"  do

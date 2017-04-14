@@ -5,28 +5,22 @@ defmodule Blaces.AuthController do
 
   alias Blaces.User
 
-  def login(conn, params) do
-    %{"email" => email, "password" => given_pass} = params
-    user = Repo.get_by(User, email: email)
+  @token_type "Bearer"
 
-    cond do
-      user && checkpw(given_pass, user.password_hash) ->
-        signin_user(conn, user)
-      user ->
-        {:error, :unauthorized, conn}  #TODO Implement for API
-      true ->
-        dummy_checkpw
-        {:error, :not_found, conn}  # Implement for API
+  def show(conn, params) do
+    case Blaces.Auth.api_login_by_email_and_pass(conn, params) do
+      {:ok, conn} ->
+        jwt = Guardian.Plug.current_token(conn)
+        {:ok, claims} = Guardian.Plug.claims(conn)
+        exp = Map.get(claims, "exp")
+
+        conn
+        |> put_resp_header("authorization", @token_type <> " #{jwt}")
+        |> put_resp_header("x-expires", "#{exp}")
+        |> render("login.json", jwt: jwt, exp: exp, token_type: @token_type)
+      {:error, reason, conn} ->
+        conn
+        |> render(Blaces.ErrorView, "error.json", reason: reason)
     end
   end
-
-  #TODO move to Blaces.Auth
-  defp signin_user(conn, user) do
-    auth = conn
-            |> Guardian.Plug.api_sign_in(user)
-            |> Guardian.Plug.current_token
-    #IO.inspect token
-    render(conn, "login.json", auth: auth)
-  end
-
 end
