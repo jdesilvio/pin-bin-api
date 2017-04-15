@@ -35,7 +35,7 @@ defmodule Blaces.Router do
 
     resources "/users", UserController, only: [:new, :create]
 
-    get "/auth", AuthController, :show
+    post "/auth", AuthController, :show
 
     # Authenticated user
     scope "/"  do
