@@ -18,4 +18,9 @@ defmodule Blaces.ErrorViewTest do
     assert render_to_string(Blaces.ErrorView, "505.html", []) ==
            "Internal server error"
   end
+
+  test "render error.json" do
+    assert render(Blaces.ErrorView, "error.json", %{reason: :some_reason}) ==
+      %{error: %{reason: :some_reason}}
+  end
 end
