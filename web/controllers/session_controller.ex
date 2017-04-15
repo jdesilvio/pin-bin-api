@@ -4,7 +4,7 @@ defmodule Blaces.SessionController do
   plug :scrub_params, "session" when action in ~w(create)a
 
   def new(conn, _) do
-    render conn, "new.html"
+    render(conn, :new)
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
@@ -16,7 +16,7 @@ defmodule Blaces.SessionController do
       {:error, _reason, conn} ->
         conn
         |> put_flash(:error, "Invalid email/password combination")
-        |> render("new.html")
+        |> render(:new)
     end
   end
 
@@ -25,10 +25,6 @@ defmodule Blaces.SessionController do
     |> Blaces.Auth.logout
     |> put_flash(:info, "See you later!")
     |> redirect(to: page_path(conn, :index))
-  end
-
-  defp logout(conn) do
-    Guardian.Plug.sign_out(conn)
   end
 
 end
