@@ -20,7 +20,7 @@ defmodule Blaces.BucketController do
       |> Repo.all
       |> Repo.preload(:user)
 
-    render(conn, "index.html", buckets: buckets, user: user)
+    render(conn, :index, buckets: buckets, user: user)
   end
 
   def show(conn, %{"user_id" => user_id, "id" => id}, _current_user) do
@@ -28,7 +28,7 @@ defmodule Blaces.BucketController do
 
     bucket = user |> user_bucket_by_id(id) |> Repo.preload(:user)
 
-    render(conn, "show.html", bucket: bucket, user: user)
+    render(conn, :show, bucket: bucket, user: user)
   end
 
   def new(conn, _params, current_user) do
@@ -37,7 +37,7 @@ defmodule Blaces.BucketController do
       |> build_assoc(:buckets)
       |> Bucket.changeset
 
-    render(conn, "new.html", changeset: changeset)
+    render(conn, :new, changeset: changeset)
   end
 
   def create(conn, %{"bucket" => bucket_params}, current_user) do
@@ -54,7 +54,7 @@ defmodule Blaces.BucketController do
         |> put_flash(:info, "Bucket was created successfully!")
         |> redirect(to: user_bucket_path(conn, :index, current_user.id))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, :new, changeset: changeset)
     end
   end
 
@@ -77,7 +77,7 @@ defmodule Blaces.BucketController do
 
     changeset = Bucket.changeset(bucket)
 
-    render(conn, "edit.html", bucket: bucket, changeset: changeset)
+    render(conn, :edit, bucket: bucket, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "bucket" => bucket_params}, current_user) do
@@ -91,7 +91,7 @@ defmodule Blaces.BucketController do
         |> put_flash(:info, "Bucket was updated successfully!")
         |> redirect(to: user_bucket_path(conn, :show, current_user.id, bucket.id))
       {:error, changeset} ->
-        render(conn, "edit.html", bucket: bucket, changeset: changeset)
+        render(conn, :edit, bucket: bucket, changeset: changeset)
     end
   end
 
