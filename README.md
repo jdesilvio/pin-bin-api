@@ -16,12 +16,19 @@ What I wanted was **a simple system for filing away place of interest AND a smar
     * Alert settings
     * Account settings
 
-### Notes:
+### Examples:
 
-API Example:
+#### _API_
 
+    # Get your API JSON Web Token (jwt)
+    curl -X POST 'http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<YOUR_PASSWORD>'
+
+    # Use your jwt access API endpoints
+    curl -H "Authorization: Bearer <jwt>" http://localhost:4000/api/v1/users/2
+
+    # Yelp endpoint
     http://localhost:4000/api/v1/yelp?latitude=40&longitude=-75
 
-Browser Example:
+#### _Browser_
 
     http://localhost:4000/yelp
