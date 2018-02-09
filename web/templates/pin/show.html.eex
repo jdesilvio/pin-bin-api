@@ -19,5 +19,5 @@
 
 </ul>
 
-<%= link "Edit", to: pin_path(@conn, :edit, @pin) %>
-<%= link "Back", to: pin_path(@conn, :index) %>
+<%= link "Edit", to: user_bucket_pin_path(@conn, @current_user, :edit, @pin) %>
+<%= link "Back", to: user_bucket_pin_path(@conn, @current_user, :index, @pin) %>
