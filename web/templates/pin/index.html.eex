@@ -1,0 +1,30 @@
+<h2>Listing pins</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for pin <- @pins do %>
+    <tr>
+      <td><%= pin.name %></td>
+      <td><%= pin.latitude %></td>
+      <td><%= pin.longitude %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: pin_path(@conn, :show, pin), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: pin_path(@conn, :edit, pin), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: pin_path(@conn, :delete, pin), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New pin", to: pin_path(@conn, :new) %>
