@@ -8,6 +8,7 @@ defmodule Blaces.Pin do
     field :name, :string
     field :latitude, :float
     field :longitude, :float
+    belongs_to :user, Blaces.User
     belongs_to :bucket, Blaces.Bucket
 
     timestamps()

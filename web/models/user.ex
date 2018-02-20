@@ -10,6 +10,7 @@ defmodule Blaces.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     has_many :buckets, Blaces.Bucket
+    has_many :pins, Blaces.Pin
 
     timestamps()
   end
