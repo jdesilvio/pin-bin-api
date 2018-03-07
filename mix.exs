@@ -39,7 +39,7 @@ defmodule Blaces.Mixfile do
      {:cowboy, "~> 1.0"},
 
      # Other deps
-     {:yelp_ex, "~> 0.1.2"},
+     {:yelp_ex, "~> 0.2.0"},
      {:poison, ">= 0.0.0", override: true},  # Workaround for YelpEx/Phoenix dep conflict
      {:comeonin, "~> 3.0"},
      {:guardian, "~> 0.14"},
