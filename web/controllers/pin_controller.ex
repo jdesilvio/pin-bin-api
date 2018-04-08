@@ -2,14 +2,28 @@ defmodule Blaces.PinController do
   use Blaces.Web, :controller
 
   alias Blaces.Pin
+  alias Blaces.Bucket
+  alias Blaces.User
+
+  plug :scrub_params, "pin" when action in [:create, :update]
+
+  def action(conn, _) do
+    apply(__MODULE__, action_name(conn),
+          [conn, conn.params, conn.assigns.current_user])
+  end
 
   def index(conn, _params) do
     pins = Repo.all(Pin)
     render(conn, :index, pins: pins)
   end
 
-  def new(conn, _params) do
-    changeset = Pin.changeset(%Pin{})
+  def new(conn, _params, current_user) do
+
+    changeset =
+      current_user
+      |> build_assoc(:pins)
+      |> Pin.changeset
+
     render(conn, :new, changeset: changeset)
   end
 
