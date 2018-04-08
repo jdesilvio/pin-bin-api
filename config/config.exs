@@ -19,11 +19,11 @@ config :logger, :console,
 
 # Guardian config
 config :guardian, Guardian,
- issuer: "Blaces.#{Mix.env}",
- ttl: {30, :days},
- verify_issuer: true,
- serializer: Blaces.GuardianSerializer,
- secret_key: to_string(Mix.env) <> "SuPerseCret_aBraCadabrA"
+  issuer: "Blaces.#{Mix.env}",
+  ttl: {30, :days},
+  verify_issuer: true,
+  serializer: Blaces.GuardianSerializer,
+  secret_key: to_string(Mix.env) <> "SuPerseCret_aBraCadabrA"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
