@@ -17,14 +17,16 @@ defmodule Blaces.PinController do
     render(conn, :index, pins: pins)
   end
 
-  def new(conn, _params, current_user) do
-
+  def new(conn, params, current_user) do
     changeset =
       current_user
       |> build_assoc(:pins)
       |> Pin.changeset
 
-    render(conn, :new, changeset: changeset)
+    bucket_id = params["bucket_id"]
+    bucket = Repo.get(Bucket, bucket_id)
+
+    render(conn, :new, changeset: changeset, bucket: bucket)
   end
 
   def create(conn, %{"pin" => pin_params}, current_user) do
