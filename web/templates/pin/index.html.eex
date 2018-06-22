@@ -18,15 +18,24 @@
       <td><%= pin.longitude %></td>
 
       <td class="text-right">
-        <!--
-        <%= link "Show", to: user_bucket_pin_path(@conn, :show, pin.user_id, pin.bucket_id, pin), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: user_bucket_pin_path(@conn, :edit, @current_user, pin), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: user_bucket_pin_path(@conn, :delete, @current_user, pin), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-        -->
+        <%= link "Show",
+                 to: user_bucket_pin_path(@conn, :show, pin.user_id, pin.bucket_id, pin),
+                 class: "btn btn-default btn-xs"
+        %>
+        <%= link "Edit",
+                 to: user_bucket_pin_path(@conn, :edit, pin.user_id, pin.bucket_id, pin),
+                 class: "btn btn-default btn-xs"
+        %>
+        <%= link "Delete",
+                 to: user_bucket_pin_path(@conn, :delete, pin.user_id, pin.bucket_id, pin),
+                 method: :delete,
+                 data: [confirm: "Are you sure?"],
+                 class: "btn btn-danger btn-xs"
+        %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New pin", to: user_bucket_pin_path(@conn, @current_user, :new, @pin) %>
+<%= link "New pin", to: user_bucket_pin_path(@conn, :new, @current_user, @bucket) %>
