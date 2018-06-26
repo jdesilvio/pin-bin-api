@@ -60,26 +60,36 @@ defmodule Blaces.PinController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user) do
+  def show(conn, params, current_user) do
+    %{"id" => id, "user_id" => user_id, "bucket_id" => bucket_id} = params
     pin = Repo.get!(Pin, id)
-    render(conn, :show, pin: pin)
+    user = User |> Repo.get!(user_id)
+    bucket = Bucket |> Repo.get!(bucket_id)
+    pin = Pin |> Repo.get!(id)
+    changeset = Pin.changeset(pin)
+    render(conn, :show, pin: pin, bucket: bucket, user: user, changeset: changeset)
   end
 
-  def edit(conn, %{"id" => id}) do
-    pin = Repo.get!(Pin, id)
+  def edit(conn, params, current_user) do
+    %{"id" => id, "user_id" => user_id, "bucket_id" => bucket_id} = params
+
+    user = User |> Repo.get!(user_id)
+    bucket = Bucket |> Repo.get!(bucket_id)
+    pin = Pin |> Repo.get!(id)
     changeset = Pin.changeset(pin)
-    render(conn, :edit, pin: pin, changeset: changeset)
+    render(conn, :edit, pin: pin, bucket: bucket, user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pin" => pin_params}, current_user) do
     pin = Repo.get!(Pin, id)
+    bucket = Repo.get!(Bucket, conn.params["bucket_id"])
     changeset = Pin.changeset(pin, pin_params)
 
     case Repo.update(changeset) do
       {:ok, pin} ->
         conn
         |> put_flash(:info, "Pin updated successfully.")
-        |> redirect(to: user_bucket_pin_path(conn, :show, current_user, pin))
+        |> redirect(to: user_bucket_pin_path(conn, :show, current_user, bucket, pin))
       {:error, changeset} ->
         render(conn, :edit, pin: pin, changeset: changeset)
     end
