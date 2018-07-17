@@ -9,7 +9,7 @@ defmodule Blaces.Bucket do
     field :short_name, :string
     field :is_public, :boolean, default: false
     belongs_to :user, Blaces.User
-    has_many :pins, Blaces.Pins
+    has_many :pins, Blaces.Pin
 
     timestamps()
   end
