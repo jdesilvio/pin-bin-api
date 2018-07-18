@@ -13,7 +13,6 @@ defmodule Blaces.BucketController do
 
   def index(conn, %{"user_id" => user_id}, _current_user) do
     user = User |> Repo.get!(user_id)
-
     buckets =
       user
       |> user_buckets
@@ -25,7 +24,6 @@ defmodule Blaces.BucketController do
 
   def show(conn, %{"user_id" => user_id, "id" => id}, _current_user) do
     user = User |> Repo.get!(user_id)
-
     bucket = user |> user_bucket_by_id(id) |> Repo.preload(:user)
 
     render(conn, :show, bucket: bucket, user: user)
@@ -42,12 +40,12 @@ defmodule Blaces.BucketController do
 
   def create(conn, %{"bucket" => bucket_params}, current_user) do
     derived_bucket_params = bucket_params |> derive_params
-    IO.inspect derived_bucket_params
+
     changeset =
       current_user
       |> build_assoc(:buckets)
       |> Bucket.changeset(derived_bucket_params)
-    IO.inspect changeset
+
     case Repo.insert(changeset) do
       {:ok, _} ->
         conn
@@ -61,12 +59,10 @@ defmodule Blaces.BucketController do
   defp derive_params(bucket_params) do
     short_name = case bucket_params["name"] do
       nil -> bucket_params
-
       _ -> bucket_params["name"]
            |> String.downcase
            |> String.trim
            |> String.replace(" ", "_")
-
     end
 
     Map.put(bucket_params, "short_name", short_name)

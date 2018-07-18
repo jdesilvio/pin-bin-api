@@ -17,8 +17,9 @@ defmodule Blaces.PinController do
 
     user = User |> Repo.get!(user_id)
     bucket = Bucket |> Repo.get!(bucket_id)
+
     pins =
-      assoc(user, :pins)
+      assoc(bucket, :pins)
       |> Repo.all
       |> Repo.preload(:user)
       |> Repo.preload(:bucket)
@@ -27,34 +28,33 @@ defmodule Blaces.PinController do
   end
 
   def new(conn, params, current_user) do
+    %{"bucket_id" => bucket_id} = params
+
     changeset =
       current_user
       |> build_assoc(:pins)
       |> Pin.changeset
 
-    bucket_id = params["bucket_id"]
-    bucket = Repo.get(Bucket, bucket_id)
+    bucket = Bucket |> Repo.get(bucket_id)
 
     render(conn, :new, changeset: changeset, bucket: bucket)
   end
 
-  def create(conn, %{"pin" => pin_params}, current_user) do
-    # TODO add private function to build params
-    pin_params = Map.put(pin_params, "bucket_id", conn.params["bucket_id"])
-    pin_params = Map.put(pin_params, "user_id", conn.params["user_id"])
+  def create(conn, params, current_user) do
+    %{"pin" => pin, "user_id" => user_id, "bucket_id" => bucket_id} = params
 
-    bucket = Repo.get!(Bucket, conn.params["bucket_id"])
+    bucket = Bucket |> Repo.get!(bucket_id)
 
     changeset =
       current_user
       |> build_assoc(:pins, bucket: bucket, bucket_id: bucket.id)
-      |> Pin.changeset(pin_params)
+      |> Pin.changeset(pin)
 
     case Repo.insert(changeset) do
       {:ok, pin} ->
         conn
         |> put_flash(:info, "Pin created successfully.")
-        |> redirect(to: user_bucket_pin_path(conn, :index, current_user, conn.params["bucket_id"]))
+        |> redirect(to: user_bucket_pin_path(conn, :index, current_user, bucket_id))
       {:error, changeset} ->
         render(conn, :new, changeset: changeset)
     end
