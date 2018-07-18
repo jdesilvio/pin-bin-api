@@ -29,5 +29,4 @@ defmodule Blaces.YelpController do
       _ -> param
     end
   end
-
 end
