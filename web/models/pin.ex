@@ -1,15 +1,15 @@
-defmodule Blaces.Bucket do
+defmodule Blaces.Pin do
   use Blaces.Web, :model
 
-  @required_fields ~w(name short_name)a
+  @required_fields ~w(name latitude longitude)a
   @optional_fields ~w()a
 
-  schema "buckets" do
+  schema "pins" do
     field :name, :string
-    field :short_name, :string
-    field :is_public, :boolean, default: false
+    field :latitude, :float
+    field :longitude, :float
     belongs_to :user, Blaces.User
-    has_many :pins, Blaces.Pin
+    belongs_to :bucket, Blaces.Bucket
 
     timestamps()
   end
@@ -21,6 +21,5 @@ defmodule Blaces.Bucket do
     struct
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> unique_constraint(:buckets_user_id_short_name_index)
   end
 end

@@ -26,5 +26,4 @@ defmodule Blaces.SessionController do
     |> put_flash(:info, "See you later!")
     |> redirect(to: page_path(conn, :index))
   end
-
 end

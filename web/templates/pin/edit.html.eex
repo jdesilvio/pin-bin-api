@@ -1,0 +1,7 @@
+<h2>Edit pin</h2>
+
+<%= render "form.html",
+           changeset: @changeset,
+           action: user_bucket_pin_path(@conn, :update, @current_user, @bucket, @pin) %>
+
+<%= link "Back", to: user_bucket_pin_path(@conn, :show, @current_user, @bucket, @pin) %>

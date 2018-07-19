@@ -15,8 +15,10 @@ defmodule Blaces.Router do
     scope "/"  do
       pipe_through [:login_required]
 
-      resources "/users", UserController, only: [:show] do
-        resources "/buckets", BucketController
+      resources "/users", UserController, only: [:show], as: :user do
+        resources "/buckets", BucketController, as: :bucket do
+          resources "/pins", PinController, as: :pin
+        end
       end
 
       get "/yelp", YelpController, :index
@@ -42,7 +44,9 @@ defmodule Blaces.Router do
       pipe_through [:api_auth, :login_required]
 
       resources "/users", UserController, only: [:show] do
-        resources "/buckets", BucketController
+        resources "/buckets", BucketController do
+          resources "/pins", PinController
+        end
       end
     end
   end
