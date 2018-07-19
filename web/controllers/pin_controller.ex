@@ -3,7 +3,6 @@ defmodule Blaces.PinController do
 
   alias Blaces.Pin
   alias Blaces.Bucket
-  alias Blaces.User
 
   plug :scrub_params, "pin" when action in [:create, :update]
 
@@ -13,9 +12,8 @@ defmodule Blaces.PinController do
   end
 
   def index(conn, params, current_user) do
-    %{"user_id" => user_id, "bucket_id" => bucket_id} = params
+    %{"bucket_id" => bucket_id} = params
 
-    user = User |> Repo.get!(user_id)
     bucket = Bucket |> Repo.get!(bucket_id)
 
     pins =
@@ -24,10 +22,10 @@ defmodule Blaces.PinController do
       |> Repo.preload(:user)
       |> Repo.preload(:bucket)
 
-    render(conn, :index, pins: pins, bucket: bucket, user: user)
+    render(conn, :index, pins: pins, bucket: bucket, user: current_user)
   end
 
-  def new(conn, params, current_user) do
+  def new(conn, params, _current_user) do
     %{"bucket_id" => bucket_id} = params
 
     bucket = Bucket |> Repo.get!(bucket_id)
@@ -38,7 +36,7 @@ defmodule Blaces.PinController do
   end
 
   def create(conn, params, current_user) do
-    %{"pin" => pin, "user_id" => user_id, "bucket_id" => bucket_id} = params
+    %{"pin" => pin, "bucket_id" => bucket_id} = params
 
     bucket = Bucket |> Repo.get!(bucket_id)
 
@@ -58,25 +56,23 @@ defmodule Blaces.PinController do
   end
 
   def show(conn, params, current_user) do
-    %{"id" => id, "user_id" => user_id, "bucket_id" => bucket_id} = params
+    %{"id" => id, "bucket_id" => bucket_id} = params
 
-    user = User |> Repo.get!(user_id)
     bucket = Bucket |> Repo.get!(bucket_id)
     pin = Pin |> Repo.get!(id)
 
-    render(conn, :show, pin: pin, bucket: bucket, user: user)
+    render(conn, :show, pin: pin, bucket: bucket, user: current_user)
   end
 
   def edit(conn, params, current_user) do
-    %{"id" => id, "user_id" => user_id, "bucket_id" => bucket_id} = params
+    %{"id" => id, "bucket_id" => bucket_id} = params
 
-    user = User |> Repo.get!(user_id)
     bucket = Bucket |> Repo.get!(bucket_id)
     pin = Pin |> Repo.get!(id)
 
     changeset = Pin.changeset(pin)
 
-    render(conn, :edit, pin: pin, bucket: bucket, user: user, changeset: changeset)
+    render(conn, :edit, pin: pin, bucket: bucket, user: current_user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pin" => pin_params}, current_user) do
