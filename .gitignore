@@ -1,3 +1,5 @@
+.env
+
 # App artifacts
 /_build
 /db
