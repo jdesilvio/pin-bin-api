@@ -2,11 +2,15 @@ defmodule Blaces.Factory do
   use ExMachina.Ecto, repo: Blaces.Repo
 
   def user_factory do
+    password = "abc123"
+    password_hash = Comeonin.Bcrypt.hashpwsalt(password)
+
     %Blaces.User{
       id: sequence(:id, &(&1 + 1)),
-      username: "Hingle McCringleberry",
+      username: sequence(:username, &"Hingle McCringleberry#{&1}"),
       email: sequence(:email, &"email-#{&1}@example.com"),
-      password: "abc123"
+      password: password,
+      password_hash: password_hash
     }
   end
 
@@ -14,6 +18,7 @@ defmodule Blaces.Factory do
     %Blaces.Bucket{
       id: sequence(:id, &(&1 + 1)),
       name: sequence(:name, &"bucket-#{&1 + 1}"),
+      short_name: sequence(:short_name, &"bucket-#{&1 + 1}"),
       user: build(:user)
     }
   end
