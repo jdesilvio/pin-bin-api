@@ -29,6 +29,13 @@ defmodule Blaces.ConnCase do
 
       # The default endpoint for testing
       @endpoint Blaces.Endpoint
+
+      def session_conn(user) do
+        session_creds = %{"email" => user.email, "password" => user.password}
+
+        build_conn()
+        |> post(session_path(build_conn(), :create, %{"session" => session_creds}))
+      end
     end
   end
 
