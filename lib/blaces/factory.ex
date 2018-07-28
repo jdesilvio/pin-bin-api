@@ -23,4 +23,14 @@ defmodule Blaces.Factory do
     }
   end
 
+  def pin_factory do
+    %Blaces.Pin{
+      id: sequence(:id, &(&1 + 1)),
+      name: sequence(:name, &"pin-#{&1 + 1}"),
+      latitude: 99.99,
+      latitude: 11.11,
+      user: build(:user),
+      bucket: build(:bucket)
+    }
+  end
 end
