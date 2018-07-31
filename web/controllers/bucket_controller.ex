@@ -46,11 +46,13 @@ defmodule Blaces.BucketController do
     end
   end
 
-  def show(conn, %{"user_id" => user_id, "id" => id}, _current_user) do
-    user = User |> Repo.get!(user_id)
-    bucket = Bucket |> Repo.get!(id)
+  def show(conn, %{"id" => id}, current_user) do
+    bucket =
+      Bucket
+      |> Repo.get!(id)
+      |> Repo.preload(:user)
 
-    render(conn, :show, bucket: bucket, user: user)
+    render(conn, :show, bucket: bucket, user: current_user)
   end
 
   def edit(conn, %{"id" => id}, current_user) do
