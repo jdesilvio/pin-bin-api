@@ -28,20 +28,21 @@ defmodule Blaces.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
+      use Phoenix.Controller, namespace: BlacesWeb
 
       alias Blaces.Repo
       import Ecto
       import Ecto.Query
 
-      import Blaces.Router.Helpers
-      import Blaces.Gettext
+      import BlacesWeb.Router.Helpers
+      import BlacesWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/blaces_web/templates",
+                        namespace: BlacesWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -49,9 +50,9 @@ defmodule Blaces.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Blaces.Router.Helpers
-      import Blaces.ErrorHelpers
-      import Blaces.Gettext
+      import BlacesWeb.Router.Helpers
+      import BlacesWeb.ErrorHelpers
+      import BlacesWeb.Gettext
     end
   end
 
@@ -68,7 +69,7 @@ defmodule Blaces.Web do
       alias Blaces.Repo
       import Ecto
       import Ecto.Query
-      import Blaces.Gettext
+      import BlacesWeb.Gettext
     end
   end
 
