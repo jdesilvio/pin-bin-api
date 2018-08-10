@@ -1,12 +1,12 @@
-defmodule Blaces.Web do
+defmodule BlacesWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Blaces.Web, :controller
-      use Blaces.Web, :view
+      use BlacesWeb, :controller
+      use BlacesWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused

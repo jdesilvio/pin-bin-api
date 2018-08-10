@@ -1,5 +1,5 @@
 defmodule BlacesWeb.PageController do
-  use Blaces.Web, :controller
+  use BlacesWeb, :controller
 
   def index(conn, _params) do
     render conn, "index.html"

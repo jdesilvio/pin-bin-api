@@ -1,5 +1,5 @@
 defmodule BlacesWeb.BucketView do
-  use Blaces.Web, :view
+  use BlacesWeb, :view
 
   def render("index.json", %{buckets: buckets}) do
     %{data: render_many(buckets, BlacesWeb.BucketView, "bucket.json")}

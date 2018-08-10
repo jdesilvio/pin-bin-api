@@ -1,5 +1,5 @@
 defmodule BlacesWeb.PinView do
-  use Blaces.Web, :view
+  use BlacesWeb, :view
 
   def render("index.json", %{pins: pins}) do
     %{data: render_many(pins, BlacesWeb.PinView, "pin.json")}

@@ -1,5 +1,5 @@
-defmodule BlacesWeb.Pin do
-  use Blaces.Web, :model
+defmodule Blaces.Pin do
+  use BlacesWeb, :model
 
   @required_fields ~w(name latitude longitude)a
   @optional_fields ~w()a
@@ -8,8 +8,8 @@ defmodule BlacesWeb.Pin do
     field :name, :string
     field :latitude, :float
     field :longitude, :float
-    belongs_to :user, BlacesWeb.User
-    belongs_to :bucket, BlacesWeb.Bucket
+    belongs_to :user, Blaces.User
+    belongs_to :bucket, Blaces.Bucket
 
     timestamps()
   end

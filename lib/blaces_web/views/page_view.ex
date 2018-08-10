@@ -1,3 +1,3 @@
 defmodule BlacesWeb.PageView do
-  use Blaces.Web, :view
+  use BlacesWeb, :view
 end

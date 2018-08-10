@@ -1,5 +1,5 @@
 defmodule BlacesWeb.SessionController do
-  use Blaces.Web, :controller
+  use BlacesWeb, :controller
 
   plug :scrub_params, "session" when action in ~w(create)a
 

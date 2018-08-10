@@ -1,7 +1,7 @@
 defmodule BlacesWeb.UserController do
-  use Blaces.Web, :controller
+  use BlacesWeb, :controller
 
-  alias BlacesWeb.User
+  alias Blaces.User
 
   plug :scrub_params, "user" when action in [:create]
 

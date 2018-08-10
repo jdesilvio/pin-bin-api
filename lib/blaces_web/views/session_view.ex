@@ -1,3 +1,3 @@
 defmodule BlacesWeb.SessionView do
-  use Blaces.Web, :view
+  use BlacesWeb, :view
 end

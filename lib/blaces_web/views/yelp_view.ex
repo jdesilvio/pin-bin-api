@@ -1,5 +1,5 @@
 defmodule BlacesWeb.YelpView do
-  use Blaces.Web, :view
+  use BlacesWeb, :view
 
   def render("index.json", %{yelp: yelp}) do
     %{data: render_one(yelp, BlacesWeb.YelpView, "yelp.json")}

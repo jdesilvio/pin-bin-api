@@ -1,5 +1,5 @@
 defmodule BlacesWeb.Router do
-  use Blaces.Web, :router
+  use BlacesWeb, :router
 
   ## Browser routing
 

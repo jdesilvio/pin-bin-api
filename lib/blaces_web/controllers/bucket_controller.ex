@@ -1,8 +1,8 @@
 defmodule BlacesWeb.BucketController do
-  use Blaces.Web, :controller
+  use BlacesWeb, :controller
 
-  alias BlacesWeb.Bucket
-  alias BlacesWeb.User
+  alias Blaces.Bucket
+  alias Blaces.User
 
   plug :scrub_params, "bucket" when action in [:create, :update]
 

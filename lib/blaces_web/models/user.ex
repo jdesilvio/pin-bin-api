@@ -1,5 +1,5 @@
-defmodule BlacesWeb.User do
-  use Blaces.Web, :model
+defmodule Blaces.User do
+  use BlacesWeb, :model
 
   @required_fields ~w(email username)a
   @optional_fields ~w()a
@@ -9,8 +9,8 @@ defmodule BlacesWeb.User do
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
-    has_many :buckets, BlacesWeb.Bucket
-    has_many :pins, BlacesWeb.Pin
+    has_many :buckets, Blaces.Bucket
+    has_many :pins, Blaces.Pin
 
     timestamps()
   end

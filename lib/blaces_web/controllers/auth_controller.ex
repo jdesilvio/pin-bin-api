@@ -1,9 +1,9 @@
 defmodule BlacesWeb.AuthController do
-  use Blaces.Web, :controller
+  use BlacesWeb, :controller
 
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-  alias BlacesWeb.User
+  alias Blaces.User
 
   @token_type "Bearer"
 

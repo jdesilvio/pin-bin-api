@@ -1,8 +1,8 @@
 defmodule BlacesWeb.PinController do
-  use Blaces.Web, :controller
+  use BlacesWeb, :controller
 
-  alias BlacesWeb.Pin
-  alias BlacesWeb.Bucket
+  alias Blaces.Pin
+  alias Blaces.Bucket
 
   plug :scrub_params, "pin" when action in [:create, :update]
 
