@@ -11,7 +11,7 @@ defmodule Blaces do
       # Start the Ecto repository
       supervisor(Blaces.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(Blaces.Endpoint, []),
+      supervisor(BlacesWeb.Endpoint, []),
       # Start your own worker by calling: Blaces.Worker.start_link(arg1, arg2, arg3)
       # worker(Blaces.Worker, [arg1, arg2, arg3]),
     ]
@@ -25,7 +25,7 @@ defmodule Blaces do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    Blaces.Endpoint.config_change(changed, removed)
+    BlacesWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end
