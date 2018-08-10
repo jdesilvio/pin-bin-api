@@ -1,4 +1,4 @@
-defmodule Blaces.ElmController do
+defmodule BlacesWeb.ElmController do
   use Blaces.Web, :controller
 
   def index(conn, _params) do

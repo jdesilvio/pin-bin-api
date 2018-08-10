@@ -1,4 +1,4 @@
-defmodule Blaces.ErrorView do
+defmodule BlacesWeb.ErrorView do
   use Blaces.Web, :view
 
   def render("404.html", _assigns) do

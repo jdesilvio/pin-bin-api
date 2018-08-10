@@ -1,4 +1,4 @@
-defmodule Blaces.SessionController do
+defmodule BlacesWeb.SessionController do
   use Blaces.Web, :controller
 
   plug :scrub_params, "session" when action in ~w(create)a
@@ -8,7 +8,7 @@ defmodule Blaces.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
-    case Blaces.Auth.login_by_email_and_pass(conn, email, password) do
+    case BlacesWeb.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "You’re now signed in!")
@@ -22,7 +22,7 @@ defmodule Blaces.SessionController do
 
   def delete(conn, _) do
     conn
-    |> Blaces.Auth.logout
+    |> BlacesWeb.Auth.logout
     |> put_flash(:info, "See you later!")
     |> redirect(to: page_path(conn, :index))
   end

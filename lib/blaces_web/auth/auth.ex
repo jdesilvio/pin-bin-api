@@ -1,8 +1,8 @@
-defmodule Blaces.Auth do
+defmodule BlacesWeb.Auth do
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-  alias Blaces.User
-  alias Blaces.Repo
+  alias BlacesWeb.User
+  alias BlacesWeb.Repo
 
   def login_by_email_and_pass(conn, email, given_pass) do
     user = Repo.get_by(User, email: email)

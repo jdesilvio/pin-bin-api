@@ -1,14 +1,14 @@
-defmodule Blaces.AuthController do
+defmodule BlacesWeb.AuthController do
   use Blaces.Web, :controller
 
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
-  alias Blaces.User
+  alias BlacesWeb.User
 
   @token_type "Bearer"
 
   def show(conn, params) do
-    case Blaces.Auth.api_login_by_email_and_pass(conn, params) do
+    case BlacesWeb.Auth.api_login_by_email_and_pass(conn, params) do
       {:ok, conn} ->
         jwt = Guardian.Plug.current_token(conn)
         {:ok, claims} = Guardian.Plug.claims(conn)
@@ -20,7 +20,7 @@ defmodule Blaces.AuthController do
         |> render("login.json", jwt: jwt, exp: exp, token_type: @token_type)
       {:error, reason, conn} ->
         conn
-        |> render(Blaces.ErrorView, "error.json", reason: reason)
+        |> render(BlacesWeb.ErrorView, "error.json", reason: reason)
     end
   end
 end

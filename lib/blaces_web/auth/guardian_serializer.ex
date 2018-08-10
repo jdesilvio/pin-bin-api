@@ -1,8 +1,8 @@
-defmodule Blaces.GuardianSerializer do
+defmodule BlacesWeb.GuardianSerializer do
   @behaviour Guardian.Serializer
 
-  alias Blaces.Repo
-  alias Blaces.User
+  alias BlacesWeb.Repo
+  alias BlacesWeb.User
 
   def for_token(user = %User{}), do: { :ok, "User:#{user.id}" }
   def for_token(_), do: { :error, "Unknown resource type" }

@@ -1,4 +1,4 @@
-defmodule Blaces.Bucket do
+defmodule BlacesWeb.Bucket do
   use Blaces.Web, :model
 
   @required_fields ~w(name short_name)a
@@ -8,8 +8,8 @@ defmodule Blaces.Bucket do
     field :name, :string
     field :short_name, :string
     field :is_public, :boolean, default: false
-    belongs_to :user, Blaces.User
-    has_many :pins, Blaces.Pin
+    belongs_to :user, BlacesWeb.User
+    has_many :pins, BlacesWeb.Pin
 
     timestamps()
   end

@@ -1,3 +1,3 @@
-defmodule Blaces.ElmView do
+defmodule BlacesWeb.ElmView do
   use Blaces.Web, :view
 end

@@ -1,4 +1,4 @@
-defmodule Blaces.PageController do
+defmodule BlacesWeb.PageController do
   use Blaces.Web, :controller
 
   def index(conn, _params) do

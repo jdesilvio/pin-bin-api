@@ -1,5 +1,5 @@
-defmodule Blaces.GuardianErrorHandler do
-  import Blaces.Router.Helpers
+defmodule BlacesWeb.GuardianErrorHandler do
+  import BlacesWeb.Router.Helpers
 
   def unauthenticated(conn, _params) do
     conn

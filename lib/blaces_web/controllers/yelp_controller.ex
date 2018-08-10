@@ -1,4 +1,4 @@
-defmodule Blaces.YelpController do
+defmodule BlacesWeb.YelpController do
   use Blaces.Web, :controller
 
   def index(conn, params) do

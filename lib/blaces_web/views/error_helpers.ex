@@ -1,4 +1,4 @@
-defmodule Blaces.ErrorHelpers do
+defmodule BlacesWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Blaces.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Blaces.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(BlacesWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Blaces.Gettext, "errors", msg, opts)
+      Gettext.dgettext(BlacesWeb.Gettext, "errors", msg, opts)
     end
   end
 end

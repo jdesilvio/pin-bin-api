@@ -1,8 +1,8 @@
-defmodule Blaces.UserView do
+defmodule BlacesWeb.UserView do
   use Blaces.Web, :view
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, Blaces.UserView, "user.json")}
+    %{data: render_one(user, BlacesWeb.UserView, "user.json")}
   end
 
   def render("user.json", %{user: user}) do

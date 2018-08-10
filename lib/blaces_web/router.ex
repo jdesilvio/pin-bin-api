@@ -1,9 +1,9 @@
-defmodule Blaces.Router do
+defmodule BlacesWeb.Router do
   use Blaces.Web, :router
 
   ## Browser routing
 
-  scope "/", Blaces do
+  scope "/", BlacesWeb do
     pipe_through [:browser, :with_session]
 
     get "/", PageController, :index
@@ -29,7 +29,7 @@ defmodule Blaces.Router do
 
   ## API routing
 
-  scope "/api/v1", Blaces do
+  scope "/api/v1", BlacesWeb do
     pipe_through [:api]
 
     get "/yelp", YelpController, :index
@@ -65,12 +65,12 @@ defmodule Blaces.Router do
   pipeline :with_session do
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource
-    plug Blaces.CurrentUser
+    plug BlacesWeb.CurrentUser
   end
 
   pipeline :login_required do
     plug Guardian.Plug.EnsureAuthenticated,
-         handler: Blaces.GuardianErrorHandler
+         handler: BlacesWeb.GuardianErrorHandler
   end
 
   pipeline :api do
@@ -80,7 +80,7 @@ defmodule Blaces.Router do
   end
 
   pipeline :api_auth do
-    plug Blaces.InspectConn #TODO remove <<<
+    plug BlacesWeb.InspectConn #TODO remove <<<
   end
 
 end
