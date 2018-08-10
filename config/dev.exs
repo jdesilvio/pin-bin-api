@@ -20,8 +20,8 @@ config :blaces, BlacesWeb.Endpoint,
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{lib/blaces_web/views/.*(ex)$},
+      ~r{lib/blaces_web/templates/.*(eex)$}
     ]
   ]
 
