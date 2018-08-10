@@ -65,8 +65,8 @@ defmodule Blaces.BucketController do
 
   def update(conn, %{"id" => id, "bucket" => bucket_params}, current_user) do
     bucket = Bucket |> Repo.get!(id)
-
-    changeset = Bucket.changeset(bucket, bucket_params)
+    derived_bucket_params = bucket_params |> derive_params
+    changeset = Bucket.changeset(bucket, derived_bucket_params)
 
     case Repo.update(changeset) do
       {:ok, bucket} ->

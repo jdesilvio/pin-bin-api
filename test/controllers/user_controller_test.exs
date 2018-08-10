@@ -5,12 +5,12 @@ defmodule Blaces.UserControllerTest do
   alias Blaces.User
   alias Blaces.Repo
 
-  @create_attrs %{username: "Moe", email: "moe@stooges.com", password: "abc123"}
+  @valid_attrs %{username: "Moe", email: "moe@stooges.com", password: "abc123"}
   @invalid_attrs %{username: nil, email: nil, password: nil}
 
 
-  describe "new/1" do
-    test 'new user' do
+  describe "new/2" do
+    test "new user" do
       conn =
         build_conn()
         |> get(user_path(build_conn(), :new))
@@ -21,20 +21,20 @@ defmodule Blaces.UserControllerTest do
   end
 
   describe "create/2" do
-    test 'create user' do
+    test "create user" do
       conn =
         build_conn()
-        |> post(user_path(build_conn(), :create, %{"user" => @create_attrs}))
+        |> post(user_path(build_conn(), :create, %{"user" => @valid_attrs}))
 
       redir_path = redirected_to(conn)
       assert redir_path =~ "/users/"
 
       conn = get(recycle(conn), redir_path)  # follow redirect
 
-      assert get_flash(conn)["info"] == "#{@create_attrs.username} created!"
+      assert get_flash(conn)["info"] == "#{@valid_attrs.username} created!"
 
       html = html_response(conn, 200)
-      assert html =~ @create_attrs.email
+      assert html =~ @valid_attrs.email
       assert html =~ "My Buckets"
 
       current_user = conn.assigns.current_user
@@ -42,11 +42,11 @@ defmodule Blaces.UserControllerTest do
       assert conn.request_path == "/users/#{current_user.id}"
 
       user1 = Repo.get(User, current_user.id)
-      assert user1.username == @create_attrs.username
-      assert user1.email == @create_attrs.email
+      assert user1.username == @valid_attrs.username
+      assert user1.email == @valid_attrs.email
     end
 
-    test 'create user error' do
+    test "create user error" do
       conn =
         build_conn()
         |> post(user_path(build_conn(), :create, %{"user" => @invalid_attrs}))
@@ -66,10 +66,10 @@ defmodule Blaces.UserControllerTest do
   end
 
   describe "show/2" do
-    test 'show user' do
+    test "show user" do
       conn =
         build_conn()
-        |> post(user_path(build_conn(), :create, %{"user" => @create_attrs}))
+        |> post(user_path(build_conn(), :create, %{"user" => @valid_attrs}))
 
       redir_path = redirected_to(conn)
       conn = get(recycle(conn), redir_path)  # follow redirect

@@ -4,7 +4,7 @@ defmodule Blaces.SessionControllerTest do
   alias Blaces.Factory
 
   describe "new/2" do
-    test 'new session' do
+    test "new session" do
       conn =
         build_conn()
         |> get(:new)
@@ -17,7 +17,7 @@ defmodule Blaces.SessionControllerTest do
   end
 
   describe "create/2" do
-    test 'create session' do
+    test "create session" do
       user = Factory.insert(:user)
 
       session_creds = %{"email" => user.email, "password" => user.password}
@@ -36,7 +36,7 @@ defmodule Blaces.SessionControllerTest do
   end
 
   describe "delete/2" do
-    test 'delete session' do
+    test "delete session" do
       user = Factory.insert(:user)
 
       session_creds = %{"email" => user.email, "password" => user.password}
@@ -60,5 +60,4 @@ defmodule Blaces.SessionControllerTest do
       assert html_response(conn, 200) =~ "Sign in"
     end
   end
-
 end
