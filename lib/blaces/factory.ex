@@ -5,7 +5,7 @@ defmodule Blaces.Factory do
     password = "abc123"
     password_hash = Comeonin.Bcrypt.hashpwsalt(password)
 
-    %Blaces.User{
+    %BlacesWeb.User{
       id: sequence(:id, &(&1 + 1)),
       username: sequence(:username, &"Hingle McCringleberry#{&1}"),
       email: sequence(:email, &"email-#{&1}@example.com"),
@@ -15,7 +15,7 @@ defmodule Blaces.Factory do
   end
 
   def bucket_factory do
-    %Blaces.Bucket{
+    %BlacesWeb.Bucket{
       id: sequence(:id, &(&1 + 1)),
       name: sequence(:name, &"bucket-#{&1 + 1}"),
       short_name: sequence(:short_name, &"bucket-#{&1 + 1}"),
@@ -24,7 +24,7 @@ defmodule Blaces.Factory do
   end
 
   def pin_factory do
-    %Blaces.Pin{
+    %BlacesWeb.Pin{
       id: sequence(:id, &(&1 + 1)),
       name: sequence(:name, &"pin-#{&1 + 1}"),
       latitude: 99.99,
