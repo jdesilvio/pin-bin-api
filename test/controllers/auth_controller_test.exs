@@ -1,5 +1,5 @@
-defmodule Blaces.AuthControllerTest do
-  use Blaces.ConnCase
+defmodule BlacesWeb.AuthControllerTest do
+  use BlacesWeb.ConnCase
 
   alias Blaces.Factory
   alias Blaces.Repo

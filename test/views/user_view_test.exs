@@ -1,5 +1,5 @@
-defmodule Blaces.UserViewTest do
-  use Blaces.ConnCase, async: true
+defmodule BlacesWeb.UserViewTest do
+  use BlacesWeb.ConnCase, async: true
 
   import Phoenix.View
 
@@ -8,12 +8,12 @@ defmodule Blaces.UserViewTest do
   @user %User{}
 
   test "renders show.json" do
-    assert render(Blaces.UserView, "show.json", %{user: @user}) ==
+    assert render(BlacesWeb.UserView, "show.json", %{user: @user}) ==
       %{data: %{email: nil, id: nil, username: nil}}
   end
 
   test "renders user.json" do
-    assert render(Blaces.UserView, "user.json", %{user: @user}) ==
+    assert render(BlacesWeb.UserView, "user.json", %{user: @user}) ==
       %{email: nil, id: nil, username: nil}
   end
 end

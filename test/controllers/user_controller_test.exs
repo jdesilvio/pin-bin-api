@@ -1,5 +1,5 @@
-defmodule Blaces.UserControllerTest do
-  use Blaces.ConnCase
+defmodule BlacesWeb.UserControllerTest do
+  use BlacesWeb.ConnCase
 
   import Phoenix.ConnTest
   alias Blaces.User
@@ -7,6 +7,7 @@ defmodule Blaces.UserControllerTest do
 
   @valid_attrs %{username: "Moe", email: "moe@stooges.com", password: "abc123"}
   @invalid_attrs %{username: nil, email: nil, password: nil}
+  @invalid_attrs2 %{username: "Larry", email: "larry@stooges.com", password: nil}
 
 
   describe "new/2" do

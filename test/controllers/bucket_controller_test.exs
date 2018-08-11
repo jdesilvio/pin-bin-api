@@ -1,5 +1,5 @@
-defmodule Blaces.BucketControllerTest do
-  use Blaces.ConnCase
+defmodule BlacesWeb.BucketControllerTest do
+  use BlacesWeb.ConnCase
 
   import Phoenix.ConnTest
   alias Blaces.User

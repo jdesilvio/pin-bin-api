@@ -1,5 +1,5 @@
-defmodule Blaces.SessionControllerTest do
-  use Blaces.ConnCase
+defmodule BlacesWeb.SessionControllerTest do
+  use BlacesWeb.ConnCase
 
   alias Blaces.Factory
 
