@@ -1,5 +1,5 @@
 defmodule Blaces.UserTest do
-  use Blaces.ModelCase
+  use Blaces.DataCase
 
   alias Blaces.User
 
