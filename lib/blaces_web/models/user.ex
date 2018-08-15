@@ -1,7 +1,7 @@
 defmodule Blaces.User do
   use BlacesWeb, :model
 
-  @required_fields ~w(email username)a
+  @required_fields ~w(email username password)a
   @optional_fields ~w()a
 
   schema "users" do
@@ -32,7 +32,6 @@ defmodule Blaces.User do
   def registration_changeset(struct, params) do
     struct
     |> changeset(params)
-    |> cast(params, ~w(password)a, [])
     |> validate_length(:password, min: 6, max: 100)
     |> hash_password
   end

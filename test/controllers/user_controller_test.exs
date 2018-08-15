@@ -7,8 +7,6 @@ defmodule BlacesWeb.UserControllerTest do
 
   @valid_attrs %{username: "Moe", email: "moe@stooges.com", password: "abc123"}
   @invalid_attrs %{username: nil, email: nil, password: nil}
-  @invalid_attrs2 %{username: "Larry", email: "larry@stooges.com", password: nil}
-
 
   describe "new/2" do
     test "new user" do
