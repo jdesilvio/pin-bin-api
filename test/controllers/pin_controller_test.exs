@@ -1,5 +1,5 @@
-defmodule Blaces.PinControllerTest do
-  use Blaces.ConnCase
+defmodule BlacesWeb.PinControllerTest do
+  use BlacesWeb.ConnCase
 
   alias Blaces.Pin
   alias Blaces.Factory

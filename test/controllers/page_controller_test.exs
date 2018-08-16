@@ -1,5 +1,5 @@
-defmodule Blaces.PageControllerTest do
-  use Blaces.ConnCase
+defmodule BlacesWeb.PageControllerTest do
+  use BlacesWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

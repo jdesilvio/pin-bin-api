@@ -1,3 +1,3 @@
-defmodule Blaces.LayoutViewTest do
-  use Blaces.ConnCase, async: true
+defmodule BlacesWeb.LayoutViewTest do
+  use BlacesWeb.ConnCase, async: true
 end

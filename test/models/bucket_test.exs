@@ -1,5 +1,5 @@
 defmodule Blaces.BucketTest do
-  use Blaces.ModelCase
+  use Blaces.DataCase
 
   alias Blaces.Bucket
 

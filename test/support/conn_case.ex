@@ -1,4 +1,4 @@
-defmodule Blaces.ConnCase do
+defmodule BlacesWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -25,10 +25,10 @@ defmodule Blaces.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import Blaces.Router.Helpers
+      import BlacesWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Blaces.Endpoint
+      @endpoint BlacesWeb.Endpoint
 
       def session_conn(user) do
         session_creds = %{"email" => user.email, "password" => user.password}

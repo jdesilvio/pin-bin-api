@@ -1,5 +1,5 @@
 defmodule Blaces.PinTest do
-  use Blaces.ModelCase
+  use Blaces.DataCase
 
   alias Blaces.Pin
 
