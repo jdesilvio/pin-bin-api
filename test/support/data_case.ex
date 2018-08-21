@@ -1,4 +1,4 @@
-defmodule Blaces.DataCase do
+defmodule PinBin.DataCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,20 +16,20 @@ defmodule Blaces.DataCase do
 
   using do
     quote do
-      alias Blaces.Repo
+      alias PinBin.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Blaces.DataCase
+      import PinBin.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blaces.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PinBin.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Blaces.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(PinBin.Repo, {:shared, self()})
     end
 
     :ok
@@ -59,7 +59,7 @@ defmodule Blaces.DataCase do
   """
   def errors_on(struct, data) do
     struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&BlacesWeb.ErrorHelpers.translate_error/1)
+    |> Ecto.Changeset.traverse_errors(&PinBinWeb.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end
 end

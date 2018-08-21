@@ -1,4 +1,4 @@
-defmodule BlacesWeb.ChannelCase do
+defmodule PinBinWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,22 +20,22 @@ defmodule BlacesWeb.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Blaces.Repo
+      alias PinBin.Repo
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
 
 
       # The default endpoint for testing
-      @endpoint BlacesWeb.Endpoint
+      @endpoint PinBinWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Blaces.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PinBin.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Blaces.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(PinBin.Repo, {:shared, self()})
     end
 
     :ok

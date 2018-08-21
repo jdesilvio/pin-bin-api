@@ -1,7 +1,7 @@
-defmodule Blaces.BucketTest do
-  use Blaces.DataCase
+defmodule PinBin.BucketTest do
+  use PinBin.DataCase
 
-  alias Blaces.Bucket
+  alias PinBin.Bucket
 
   @valid_attrs %{is_public: true, name: "some content", short_name: "some content"}
   @invalid_attrs %{}

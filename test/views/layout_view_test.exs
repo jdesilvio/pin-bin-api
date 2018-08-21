@@ -1,3 +1,3 @@
-defmodule BlacesWeb.LayoutViewTest do
-  use BlacesWeb.ConnCase, async: true
+defmodule PinBinWeb.LayoutViewTest do
+  use PinBinWeb.ConnCase, async: true
 end

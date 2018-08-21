@@ -1,7 +1,7 @@
-defmodule Blaces.UserTest do
-  use Blaces.DataCase
+defmodule PinBin.UserTest do
+  use PinBin.DataCase
 
-  alias Blaces.User
+  alias PinBin.User
 
   @valid_attrs %{email: "moe@stooges.com", password: "abc123", username: "moe"}
   @invalid_attrs %{}

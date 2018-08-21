@@ -1,8 +1,8 @@
-defmodule BlacesWeb.PinControllerTest do
-  use BlacesWeb.ConnCase
+defmodule PinBinWeb.PinControllerTest do
+  use PinBinWeb.ConnCase
 
-  alias Blaces.Pin
-  alias Blaces.Factory
+  alias PinBin.Pin
+  alias PinBin.Factory
 
   @valid_attrs %{latitude: "120.5", longitude: "120.5", name: "some pin"}
   @invalid_attrs %{latitude: nil, longitude: nil, name: nil}

@@ -1,7 +1,7 @@
-defmodule BlacesWeb.SessionControllerTest do
-  use BlacesWeb.ConnCase
+defmodule PinBinWeb.SessionControllerTest do
+  use PinBinWeb.ConnCase
 
-  alias Blaces.Factory
+  alias PinBin.Factory
 
   describe "new/2" do
     test "new session" do
@@ -10,7 +10,7 @@ defmodule BlacesWeb.SessionControllerTest do
         |> get(:new)
 
       assert conn.request_path == "/"
-      assert html_response(conn, 200) =~ "Welcome to Blaces!"
+      assert html_response(conn, 200) =~ "Welcome to PinBin!"
       assert html_response(conn, 200) =~ "Register"
       assert html_response(conn, 200) =~ "Sign in"
     end

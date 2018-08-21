@@ -1,9 +1,9 @@
-defmodule BlacesWeb.UserControllerTest do
-  use BlacesWeb.ConnCase
+defmodule PinBinWeb.UserControllerTest do
+  use PinBinWeb.ConnCase
 
   import Phoenix.ConnTest
-  alias Blaces.User
-  alias Blaces.Repo
+  alias PinBin.User
+  alias PinBin.Repo
 
   @valid_attrs %{username: "Moe", email: "moe@stooges.com", password: "abc123"}
   @invalid_attrs %{username: nil, email: nil, password: nil}

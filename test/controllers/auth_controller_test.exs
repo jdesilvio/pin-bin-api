@@ -1,9 +1,9 @@
-defmodule BlacesWeb.AuthControllerTest do
-  use BlacesWeb.ConnCase
+defmodule PinBinWeb.AuthControllerTest do
+  use PinBinWeb.ConnCase
 
-  alias Blaces.Factory
-  alias Blaces.Repo
-  alias Blaces.User
+  alias PinBin.Factory
+  alias PinBin.Repo
+  alias PinBin.User
 
   setup do
     user = Factory.insert(:user)

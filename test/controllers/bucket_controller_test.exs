@@ -1,11 +1,11 @@
-defmodule BlacesWeb.BucketControllerTest do
-  use BlacesWeb.ConnCase
+defmodule PinBinWeb.BucketControllerTest do
+  use PinBinWeb.ConnCase
 
   import Phoenix.ConnTest
-  alias Blaces.User
-  alias Blaces.Bucket
-  alias Blaces.Repo
-  alias Blaces.Factory
+  alias PinBin.User
+  alias PinBin.Bucket
+  alias PinBin.Repo
+  alias PinBin.Factory
 
   @valid_attrs %{"name" => "my bucket"}
 
