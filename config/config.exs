@@ -1,11 +1,11 @@
 use Mix.Config
 
 # General application configuration
-config :blaces,
+config :pin_bin,
   ecto_repos: [PinBin.Repo]
 
 # Configures the endpoint
-config :blaces, PinBinWeb.Endpoint,
+config :pin_bin, PinBinWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "nyNU+drASfGWwGuD3gtT8l2jFWk5cr+gFScvkm6zVx1copuk1PuucLIFWZRBpJEw",
   render_errors: [view: PinBinWeb.ErrorView, accepts: ~w(html json)],
