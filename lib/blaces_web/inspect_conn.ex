@@ -1,4 +1,4 @@
-defmodule BlacesWeb.InspectConn do
+defmodule PinBinWeb.InspectConn do
   @moduledoc """
   Inspects a `conn`.
   Used for debugging.

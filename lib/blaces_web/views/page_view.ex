@@ -1,3 +1,3 @@
-defmodule BlacesWeb.PageView do
-  use BlacesWeb, :view
+defmodule PinBinWeb.PageView do
+  use PinBinWeb, :view
 end

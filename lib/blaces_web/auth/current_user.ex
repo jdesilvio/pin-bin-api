@@ -1,4 +1,4 @@
-defmodule BlacesWeb.CurrentUser do
+defmodule PinBinWeb.CurrentUser do
   @moduledoc """
   Simple `Plug` to get the `current_user`
   from a `Guardian` token.

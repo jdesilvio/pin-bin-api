@@ -1,5 +1,5 @@
-defmodule BlacesWeb.YelpController do
-  use BlacesWeb, :controller
+defmodule PinBinWeb.YelpController do
+  use PinBinWeb, :controller
 
   def index(conn, params) do
     case conn.request_path do

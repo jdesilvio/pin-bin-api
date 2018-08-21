@@ -1,8 +1,8 @@
-defmodule BlacesWeb.UserView do
-  use BlacesWeb, :view
+defmodule PinBinWeb.UserView do
+  use PinBinWeb, :view
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, BlacesWeb.UserView, "user.json")}
+    %{data: render_one(user, PinBinWeb.UserView, "user.json")}
   end
 
   def render("user.json", %{user: user}) do

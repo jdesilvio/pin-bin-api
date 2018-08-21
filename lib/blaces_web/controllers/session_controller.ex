@@ -1,5 +1,5 @@
-defmodule BlacesWeb.SessionController do
-  use BlacesWeb, :controller
+defmodule PinBinWeb.SessionController do
+  use PinBinWeb, :controller
 
   plug :scrub_params, "session" when action in ~w(create)a
 
@@ -8,7 +8,7 @@ defmodule BlacesWeb.SessionController do
   end
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
-    case BlacesWeb.Auth.login_by_email_and_pass(conn, email, password) do
+    case PinBinWeb.Auth.login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         conn
         |> put_flash(:info, "You’re now signed in!")
@@ -22,7 +22,7 @@ defmodule BlacesWeb.SessionController do
 
   def delete(conn, _) do
     conn
-    |> BlacesWeb.Auth.logout
+    |> PinBinWeb.Auth.logout
     |> put_flash(:info, "See you later!")
     |> redirect(to: page_path(conn, :index))
   end

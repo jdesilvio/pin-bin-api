@@ -1,9 +1,9 @@
-defmodule BlacesWeb.Router do
-  use BlacesWeb, :router
+defmodule PinBinWeb.Router do
+  use PinBinWeb, :router
 
   ## Browser routing
 
-  scope "/", BlacesWeb do
+  scope "/", PinBinWeb do
     pipe_through [:browser, :with_session]
 
     get "/", PageController, :index
@@ -29,7 +29,7 @@ defmodule BlacesWeb.Router do
 
   ## API routing
 
-  scope "/api/v1", BlacesWeb do
+  scope "/api/v1", PinBinWeb do
     pipe_through [:api]
 
     get "/yelp", YelpController, :index
@@ -65,12 +65,12 @@ defmodule BlacesWeb.Router do
   pipeline :with_session do
     plug Guardian.Plug.VerifySession
     plug Guardian.Plug.LoadResource
-    plug BlacesWeb.CurrentUser
+    plug PinBinWeb.CurrentUser
   end
 
   pipeline :login_required do
     plug Guardian.Plug.EnsureAuthenticated,
-         handler: BlacesWeb.GuardianErrorHandler
+         handler: PinBinWeb.GuardianErrorHandler
   end
 
   pipeline :api do
@@ -80,7 +80,7 @@ defmodule BlacesWeb.Router do
   end
 
   pipeline :api_auth do
-    plug BlacesWeb.InspectConn #TODO remove <<<
+    plug PinBinWeb.InspectConn #TODO remove <<<
   end
 
 end

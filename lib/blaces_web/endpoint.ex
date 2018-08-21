@@ -1,7 +1,7 @@
-defmodule BlacesWeb.Endpoint do
+defmodule PinBinWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :blaces
 
-  socket "/socket", BlacesWeb.UserSocket
+  socket "/socket", PinBinWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule BlacesWeb.Endpoint do
     key: "_blaces_key",
     signing_salt: "J8rvlxWx"
 
-  plug BlacesWeb.Router
+  plug PinBinWeb.Router
 end

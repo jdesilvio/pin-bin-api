@@ -1,5 +1,5 @@
-defmodule BlacesWeb.GuardianErrorHandler do
-  import BlacesWeb.Router.Helpers
+defmodule PinBinWeb.GuardianErrorHandler do
+  import PinBinWeb.Router.Helpers
 
   def unauthenticated(conn, _params) do
     conn

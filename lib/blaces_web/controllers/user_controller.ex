@@ -1,7 +1,7 @@
-defmodule BlacesWeb.UserController do
-  use BlacesWeb, :controller
+defmodule PinBinWeb.UserController do
+  use PinBinWeb, :controller
 
-  alias Blaces.User
+  alias PinBin.User
 
   plug :scrub_params, "user" when action in [:create]
 
@@ -18,7 +18,7 @@ defmodule BlacesWeb.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
-        |> BlacesWeb.Auth.login(user)
+        |> PinBinWeb.Auth.login(user)
         |> put_flash(:info, "#{user.username} created!")
         |> redirect(to: user_path(conn, :show, user))
 

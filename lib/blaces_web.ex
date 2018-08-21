@@ -1,12 +1,12 @@
-defmodule BlacesWeb do
+defmodule PinBinWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use BlacesWeb, :controller
-      use BlacesWeb, :view
+      use PinBinWeb, :controller
+      use PinBinWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -28,21 +28,21 @@ defmodule BlacesWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: BlacesWeb
+      use Phoenix.Controller, namespace: PinBinWeb
 
-      alias Blaces.Repo
+      alias PinBin.Repo
       import Ecto
       import Ecto.Query
 
-      import BlacesWeb.Router.Helpers
-      import BlacesWeb.Gettext
+      import PinBinWeb.Router.Helpers
+      import PinBinWeb.Gettext
     end
   end
 
   def view do
     quote do
       use Phoenix.View, root: "lib/blaces_web/templates",
-                        namespace: BlacesWeb
+                        namespace: PinBinWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -50,9 +50,9 @@ defmodule BlacesWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import BlacesWeb.Router.Helpers
-      import BlacesWeb.ErrorHelpers
-      import BlacesWeb.Gettext
+      import PinBinWeb.Router.Helpers
+      import PinBinWeb.ErrorHelpers
+      import PinBinWeb.Gettext
     end
   end
 
@@ -66,10 +66,10 @@ defmodule BlacesWeb do
     quote do
       use Phoenix.Channel
 
-      alias Blaces.Repo
+      alias PinBin.Repo
       import Ecto
       import Ecto.Query
-      import BlacesWeb.Gettext
+      import PinBinWeb.Gettext
     end
   end
 

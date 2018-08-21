@@ -1,5 +1,5 @@
-defmodule BlacesWeb.ErrorView do
-  use BlacesWeb, :view
+defmodule PinBinWeb.ErrorView do
+  use PinBinWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

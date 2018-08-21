@@ -1,8 +1,8 @@
-defmodule BlacesWeb.YelpView do
-  use BlacesWeb, :view
+defmodule PinBinWeb.YelpView do
+  use PinBinWeb, :view
 
   def render("index.json", %{yelp: yelp}) do
-    %{data: render_one(yelp, BlacesWeb.YelpView, "yelp.json")}
+    %{data: render_one(yelp, PinBinWeb.YelpView, "yelp.json")}
   end
 
   def render("yelp.json", %{yelp: yelp}) do

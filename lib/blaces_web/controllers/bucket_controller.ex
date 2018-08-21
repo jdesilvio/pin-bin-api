@@ -1,8 +1,8 @@
-defmodule BlacesWeb.BucketController do
-  use BlacesWeb, :controller
+defmodule PinBinWeb.BucketController do
+  use PinBinWeb, :controller
 
-  alias Blaces.Bucket
-  alias Blaces.User
+  alias PinBin.Bucket
+  alias PinBin.User
 
   plug :scrub_params, "bucket" when action in [:create, :update]
 

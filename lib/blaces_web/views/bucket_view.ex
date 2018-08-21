@@ -1,8 +1,8 @@
-defmodule BlacesWeb.BucketView do
-  use BlacesWeb, :view
+defmodule PinBinWeb.BucketView do
+  use PinBinWeb, :view
 
   def render("index.json", %{buckets: buckets}) do
-    %{data: render_many(buckets, BlacesWeb.BucketView, "bucket.json")}
+    %{data: render_many(buckets, PinBinWeb.BucketView, "bucket.json")}
   end
 
   def render("bucket.json", %{bucket: bucket}) do

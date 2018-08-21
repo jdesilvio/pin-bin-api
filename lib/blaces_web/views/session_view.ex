@@ -1,3 +1,3 @@
-defmodule BlacesWeb.SessionView do
-  use BlacesWeb, :view
+defmodule PinBinWeb.SessionView do
+  use PinBinWeb, :view
 end
