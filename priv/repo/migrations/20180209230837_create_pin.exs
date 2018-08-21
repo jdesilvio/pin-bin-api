@@ -1,4 +1,4 @@
-defmodule Blaces.Repo.Migrations.CreatePin do
+defmodule PinBin.Repo.Migrations.CreatePin do
   use Ecto.Migration
 
   def change do
