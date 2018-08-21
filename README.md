@@ -1,4 +1,4 @@
-# Blaces
+# Pin Bin
 
 The inspiration for this application came when I moved to Philadelphia. I saw a lot of cool restaurants, bars, and stores that I wanted to remember to go to. I started making a list, but then I'd never remember to refer to the list.
 
