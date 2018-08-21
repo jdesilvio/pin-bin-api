@@ -1,5 +1,5 @@
 defmodule PinBinWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :blaces
+  use Phoenix.Endpoint, otp_app: :pin_bin
 
   socket "/socket", PinBinWeb.UserSocket
 
@@ -8,7 +8,7 @@ defmodule PinBinWeb.Endpoint do
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :blaces, gzip: false,
+    at: "/", from: :pin_bin, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,7 +35,7 @@ defmodule PinBinWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_blaces_key",
+    key: "_pin_bin_key",
     signing_salt: "J8rvlxWx"
 
   plug PinBinWeb.Router

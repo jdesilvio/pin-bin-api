@@ -41,7 +41,7 @@ defmodule PinBinWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/blaces_web/templates",
+      use Phoenix.View, root: "lib/pin_bin_web/templates",
                         namespace: PinBinWeb
 
       # Import convenience functions from controllers
