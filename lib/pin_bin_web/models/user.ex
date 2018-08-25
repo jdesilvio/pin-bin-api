@@ -9,6 +9,7 @@ defmodule PinBin.User do
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :admin, :boolean
     has_many :bins, PinBin.Bin
     has_many :pins, PinBin.Pin
 
@@ -48,5 +49,4 @@ defmodule PinBin.User do
         changeset
     end
   end
-
 end
