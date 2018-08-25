@@ -1,18 +1,18 @@
-defmodule PinBin.BucketTest do
+defmodule PinBin.BinTest do
   use PinBin.DataCase
 
-  alias PinBin.Bucket
+  alias PinBin.Bin
 
   @valid_attrs %{is_public: true, name: "some content", short_name: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Bucket.changeset(%Bucket{}, @valid_attrs)
+    changeset = Bin.changeset(%Bin{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = Bucket.changeset(%Bucket{}, @invalid_attrs)
+    changeset = Bin.changeset(%Bin{}, @invalid_attrs)
     refute changeset.valid?
   end
 end

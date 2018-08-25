@@ -34,7 +34,7 @@ defmodule PinBinWeb.UserControllerTest do
 
       html = html_response(conn, 200)
       assert html =~ @valid_attrs.email
-      assert html =~ "My Buckets"
+      assert html =~ "My Bins"
 
       current_user = conn.assigns.current_user
 
