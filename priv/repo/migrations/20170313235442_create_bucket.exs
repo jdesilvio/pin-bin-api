@@ -1,8 +1,8 @@
-defmodule PinBin.Repo.Migrations.CreateBucket do
+defmodule PinBin.Repo.Migrations.CreateBin do
   use Ecto.Migration
 
   def change do
-    create table(:buckets) do
+    create table(:bins) do
       add :name, :string, null: false
       add :short_name, :string, null: false
       add :is_public, :boolean, default: false, null: false
@@ -10,7 +10,7 @@ defmodule PinBin.Repo.Migrations.CreateBucket do
 
       timestamps()
     end
-    create unique_index(:buckets, [:user_id, :short_name])
+    create unique_index(:bins, [:user_id, :short_name])
 
   end
 end
