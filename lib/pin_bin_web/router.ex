@@ -43,7 +43,7 @@ defmodule PinBinWeb.Router do
     scope "/"  do
       pipe_through [:api_auth, :login_required]
 
-      resources "/users", UserController, only: [:show] do
+      resources "/users", UserController, only: [:show, :index] do
         resources "/bins", BinController do
           resources "/pins", PinController
         end

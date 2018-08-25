@@ -5,6 +5,11 @@ defmodule PinBinWeb.UserController do
 
   plug :scrub_params, "user" when action in [:create]
 
+  def index(conn, _params) do
+    users = User |> Repo.all()
+    render(conn, :index, users: users)
+  end
+
   def new(conn, _params) do
     changeset = User.changeset(%User{})
     render(conn, :new, changeset: changeset)
