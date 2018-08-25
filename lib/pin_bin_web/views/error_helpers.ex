@@ -37,4 +37,13 @@ defmodule PinBinWeb.ErrorHelpers do
       Gettext.dgettext(PinBinWeb.Gettext, "errors", msg, opts)
     end
   end
+
+  @doc """
+  Traverse a list of errors and return a Map
+  of the errors and reasons.
+  """
+  def translate_errors(changeset) do
+    changeset
+      |> Ecto.Changeset.traverse_errors(&translate_error/1)
+  end
 end
