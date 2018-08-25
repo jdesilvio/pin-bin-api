@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PinBin</title>
+    <title>Pin Bin</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -36,7 +36,7 @@
 
         </nav>
 
-        <h1>PinBin</h1>
+        <h1>Pin Bin</h1>
 
       </header>
 
