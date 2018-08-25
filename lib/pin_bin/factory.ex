@@ -14,11 +14,11 @@ defmodule PinBin.Factory do
     }
   end
 
-  def bucket_factory do
-    %PinBin.Bucket{
+  def bin_factory do
+    %PinBin.Bin{
       id: sequence(:id, &(&1 + 1)),
-      name: sequence(:name, &"bucket-#{&1 + 1}"),
-      short_name: sequence(:short_name, &"bucket-#{&1 + 1}"),
+      name: sequence(:name, &"bin-#{&1 + 1}"),
+      short_name: sequence(:short_name, &"bin-#{&1 + 1}"),
       user: build(:user)
     }
   end
@@ -30,7 +30,7 @@ defmodule PinBin.Factory do
       latitude: 99.99,
       latitude: 11.11,
       user: build(:user),
-      bucket: build(:bucket)
+      bin: build(:bin)
     }
   end
 end

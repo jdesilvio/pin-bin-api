@@ -19,15 +19,15 @@
 
       <td class="text-right">
         <%= link "Show",
-                 to: user_bucket_pin_path(@conn, :show, pin.user_id, pin.bucket_id, pin),
+                 to: user_bin_pin_path(@conn, :show, pin.user_id, pin.bin_id, pin),
                  class: "btn btn-default btn-xs"
         %>
         <%= link "Edit",
-                 to: user_bucket_pin_path(@conn, :edit, pin.user_id, pin.bucket_id, pin),
+                 to: user_bin_pin_path(@conn, :edit, pin.user_id, pin.bin_id, pin),
                  class: "btn btn-default btn-xs"
         %>
         <%= link "Delete",
-                 to: user_bucket_pin_path(@conn, :delete, pin.user_id, pin.bucket_id, pin),
+                 to: user_bin_pin_path(@conn, :delete, pin.user_id, pin.bin_id, pin),
                  method: :delete,
                  data: [confirm: "Are you sure?"],
                  class: "btn btn-danger btn-xs"
@@ -38,4 +38,4 @@
   </tbody>
 </table>
 
-<%= link "New pin", to: user_bucket_pin_path(@conn, :new, @current_user, @bucket) %>
+<%= link "New pin", to: user_bin_pin_path(@conn, :new, @current_user, @bin) %>

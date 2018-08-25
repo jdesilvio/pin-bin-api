@@ -2,6 +2,6 @@
 
 <%= render "form.html",
            changeset: @changeset,
-           action: user_bucket_pin_path(@conn, :create, @current_user, @bucket) %>
+           action: user_bin_pin_path(@conn, :create, @current_user, @bin) %>
 
-<%= link "Back", to: user_bucket_pin_path(@conn, :index, @current_user, @bucket) %>
+<%= link "Back", to: user_bin_pin_path(@conn, :index, @current_user, @bin) %>

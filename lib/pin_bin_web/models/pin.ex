@@ -9,7 +9,7 @@ defmodule PinBin.Pin do
     field :latitude, :float
     field :longitude, :float
     belongs_to :user, PinBin.User
-    belongs_to :bucket, PinBin.Bucket
+    belongs_to :bin, PinBin.Bin
 
     timestamps()
   end

@@ -1,22 +1,22 @@
-<%= link "To list", to: user_bucket_path(@conn, :index, @bucket.user) %>
+<%= link "To list", to: user_bin_path(@conn, :index, @bin.user) %>
 
-<h1><%= @bucket.name %></h1>
+<h1><%= @bin.name %></h1>
 
-<p><%= @bucket.short_name %></p>
+<p><%= @bin.short_name %></p>
 
-<%= if @bucket.is_public == True do %>
-  <p>Public Bucket</p>
+<%= if @bin.is_public == True do %>
+  <p>Public Bin</p>
 <% else %>
-  <p>Private Bucket</p>
+  <p>Private Bin</p>
 <% end %>
 
 <%= if @current_user.id == @user.id do %>
   <span>
-    <%= link "Edit", to: user_bucket_path(@conn, :edit, @current_user, @bucket),
+    <%= link "Edit", to: user_bin_path(@conn, :edit, @current_user, @bin),
                      class: "btn btn-primary btn-xs" %>
     &nbsp;
-    <%= link "Delete", to: user_bucket_path(@conn, :delete, 
-                       @current_user, @bucket),
+    <%= link "Delete", to: user_bin_path(@conn, :delete, 
+                       @current_user, @bin),
                        method: :delete,
                        data: [confirm: "Really?"],
                        class: "btn btn-danger btn-xs"%>

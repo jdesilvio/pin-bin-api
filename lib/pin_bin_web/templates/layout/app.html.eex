@@ -21,7 +21,7 @@
                 <%= @current_user.email %> (<%= @current_user.id %>)
               </li>
               <li>
-                <%= link "My Buckets", to: user_bucket_path(@conn, :index, @current_user) %>
+                <%= link "My Bins", to: user_bin_path(@conn, :index, @current_user) %>
               </li>
               <li>
                 <%= link "Sign out", to: session_path(@conn, :delete, @current_user), method: "delete" %>
