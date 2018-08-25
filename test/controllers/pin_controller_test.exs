@@ -1,8 +1,8 @@
-defmodule BlacesWeb.PinControllerTest do
-  use BlacesWeb.ConnCase
+defmodule PinBinWeb.PinControllerTest do
+  use PinBinWeb.ConnCase
 
-  alias Blaces.Pin
-  alias Blaces.Factory
+  alias PinBin.Pin
+  alias PinBin.Factory
 
   @valid_attrs %{latitude: "120.5", longitude: "120.5", name: "some pin"}
   @invalid_attrs %{latitude: nil, longitude: nil, name: nil}
@@ -10,29 +10,29 @@ defmodule BlacesWeb.PinControllerTest do
   describe "index/3" do
     test "lists pins" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
-      pin = Factory.insert(:pin, user: user, bucket: bucket)
+      bin = Factory.insert(:bin, user: user)
+      pin = Factory.insert(:pin, user: user, bin: bin)
 
       conn =
         session_conn(user)
-        |> get(user_bucket_pin_path(conn, :index, user, bucket))
+        |> get(user_bin_pin_path(conn, :index, user, bin))
 
       html = html_response(conn, 200)
       assert html =~ pin.name
     end
 
-    test "list only pins associated with bucket" do
+    test "list only pins associated with bin" do
       user = Factory.insert(:user)
-      bucket1 = Factory.insert(:bucket, user: user)
-      bucket2 = Factory.insert(:bucket, user: user)
-      pin1 = Factory.insert(:pin, user: user, bucket: bucket1)
-      pin2 = Factory.insert(:pin, user: user, bucket: bucket1)
-      pin3 = Factory.insert(:pin, user: user, bucket: bucket2)
-      pin4 = Factory.insert(:pin, user: user, bucket: bucket2)
+      bin1 = Factory.insert(:bin, user: user)
+      bin2 = Factory.insert(:bin, user: user)
+      pin1 = Factory.insert(:pin, user: user, bin: bin1)
+      pin2 = Factory.insert(:pin, user: user, bin: bin1)
+      pin3 = Factory.insert(:pin, user: user, bin: bin2)
+      pin4 = Factory.insert(:pin, user: user, bin: bin2)
 
       conn =
         session_conn(user)
-        |> get(user_bucket_pin_path(conn, :index, user, bucket1))
+        |> get(user_bin_pin_path(conn, :index, user, bin1))
 
       html = html_response(conn, 200)
       assert html =~ pin1.name
@@ -45,11 +45,11 @@ defmodule BlacesWeb.PinControllerTest do
   describe "new/3" do
     test "new pin" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
+      bin = Factory.insert(:bin, user: user)
 
       conn =
         session_conn(user)
-        |> get(user_bucket_pin_path(conn, :new, user, bucket))
+        |> get(user_bin_pin_path(conn, :new, user, bin))
 
       html = html_response(conn, 200)
       assert html =~ "New pin"
@@ -59,11 +59,11 @@ defmodule BlacesWeb.PinControllerTest do
   describe "create/3" do
     test "new pin is created" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
+      bin = Factory.insert(:bin, user: user)
 
       conn =
         session_conn(user)
-        |> post(user_bucket_pin_path(conn, :create, user, bucket, pin: @valid_attrs))
+        |> post(user_bin_pin_path(conn, :create, user, bin, pin: @valid_attrs))
 
       assert get_flash(conn)["info"] == "Pin created successfully."
 
@@ -76,11 +76,11 @@ defmodule BlacesWeb.PinControllerTest do
 
     #    test "new pin is not created with invalid attributes" do
     #      user = Factory.insert(:user)
-    #      bucket = Factory.insert(:bucket, user: user)
+    #      bin = Factory.insert(:bin, user: user)
     #
     #      conn =
     #        session_conn(user)
-    #        |> post(user_bucket_pin_path(conn, :create, user, bucket, pin: @invalid_attrs))
+    #        |> post(user_bin_pin_path(conn, :create, user, bin, pin: @invalid_attrs))
     #
     #      assert get_flash(conn)["info"] == "Pin created successfully."
     #
@@ -96,12 +96,12 @@ defmodule BlacesWeb.PinControllerTest do
   describe "show/3" do
     test "show pin" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
-      pin = Factory.insert(:pin, user: user, bucket: bucket)
+      bin = Factory.insert(:bin, user: user)
+      pin = Factory.insert(:pin, user: user, bin: bin)
 
       conn =
         session_conn(user)
-        |> get(user_bucket_pin_path(conn, :show, user, bucket, pin))
+        |> get(user_bin_pin_path(conn, :show, user, bin, pin))
 
       html = html_response(conn, 200)
       assert html =~ pin.name
@@ -112,12 +112,12 @@ defmodule BlacesWeb.PinControllerTest do
   describe "edit/3" do
     test "edit pin" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
-      pin = Factory.insert(:pin, user: user, bucket: bucket)
+      bin = Factory.insert(:bin, user: user)
+      pin = Factory.insert(:pin, user: user, bin: bin)
 
       conn =
         session_conn(user)
-        |> get(user_bucket_pin_path(conn, :edit, user, bucket, pin))
+        |> get(user_bin_pin_path(conn, :edit, user, bin, pin))
 
       html = html_response(conn, 200)
       assert html =~ "Edit pin"
@@ -127,13 +127,13 @@ defmodule BlacesWeb.PinControllerTest do
   describe "update/3" do
     test "update pin" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
-      pin = Factory.insert(:pin, user: user, bucket: bucket)
+      bin = Factory.insert(:bin, user: user)
+      pin = Factory.insert(:pin, user: user, bin: bin)
       new_params = %{"name" => "new name", "longitude" => 99}
 
       conn =
         session_conn(user)
-        |> patch(user_bucket_pin_path(conn, :update, user, bucket.id, pin.id, pin: new_params))
+        |> patch(user_bin_pin_path(conn, :update, user, bin.id, pin.id, pin: new_params))
 
       assert get_flash(conn)["info"] == "Pin updated successfully."
 
@@ -149,12 +149,12 @@ defmodule BlacesWeb.PinControllerTest do
   describe "delete/3" do
     test "delete pin" do
       user = Factory.insert(:user)
-      bucket = Factory.insert(:bucket, user: user)
-      pin = Factory.insert(:pin, user: user, bucket: bucket)
+      bin = Factory.insert(:bin, user: user)
+      pin = Factory.insert(:pin, user: user, bin: bin)
 
       conn =
         session_conn(user)
-        |> delete(user_bucket_pin_path(conn, :delete, user, bucket, pin))
+        |> delete(user_bin_pin_path(conn, :delete, user, bin, pin))
 
       assert get_flash(conn)["info"] == "Pin deleted successfully."
 

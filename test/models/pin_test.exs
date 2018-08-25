@@ -1,7 +1,7 @@
-defmodule Blaces.PinTest do
-  use Blaces.DataCase
+defmodule PinBin.PinTest do
+  use PinBin.DataCase
 
-  alias Blaces.Pin
+  alias PinBin.Pin
 
   @valid_attrs %{latitude: "120.5", longitude: "120.5", name: "some content"}
   @invalid_attrs %{}

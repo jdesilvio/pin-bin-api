@@ -1,8 +1,8 @@
-defmodule Blaces.Mixfile do
+defmodule PinBin.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :blaces,
+    [app: :pin_bin,
      version: "0.0.1",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -19,7 +19,7 @@ defmodule Blaces.Mixfile do
   end
 
   def application do
-    [mod: {Blaces, []},
+    [mod: {PinBin, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html,
                     :cowboy, :logger, :gettext, :phoenix_ecto,
                     :postgrex, :yelp_ex, :comeonin, :ex_machina]]

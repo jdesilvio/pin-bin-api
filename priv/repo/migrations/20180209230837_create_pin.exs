@@ -1,4 +1,4 @@
-defmodule Blaces.Repo.Migrations.CreatePin do
+defmodule PinBin.Repo.Migrations.CreatePin do
   use Ecto.Migration
 
   def change do
@@ -7,7 +7,7 @@ defmodule Blaces.Repo.Migrations.CreatePin do
       add :latitude, :float
       add :longitude, :float
       add :user_id, references(:users, on_delete: :delete_all)
-      add :bucket_id, references(:buckets, on_delete: :delete_all)
+      add :bin_id, references(:bins, on_delete: :delete_all)
 
       timestamps()
     end
