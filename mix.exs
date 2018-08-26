@@ -29,22 +29,25 @@ defmodule PinBin.Mixfile do
   defp elixirc_paths(_),     do: ["lib"]
 
   defp deps do
-    [{:phoenix, "~> 1.3.4"},
-     {:phoenix_pubsub, "~> 1.1"},
-     {:phoenix_ecto, "~> 3.3"},
-     {:postgrex, "~> 0.13"},
-     {:phoenix_html, "~> 2.12"},
-     {:phoenix_live_reload, "~> 1.1", only: :dev},
-     {:gettext, "~> 0.15"},
-     {:cowboy, "~> 1.0"},
+    [
+      {:phoenix, "~> 1.3.4"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_ecto, "~> 3.3"},
+      {:postgrex, "~> 0.13"},
+      {:phoenix_html, "~> 2.12"},
+      {:phoenix_live_reload, "~> 1.1", only: :dev},
+      {:gettext, "~> 0.15"},
+      {:cowboy, "~> 1.0"},
 
-     # Other deps
-     {:yelp_ex, "~> 0.2.1"},
-     {:poison, "~> 3.0"},
-     {:comeonin, "~> 3.0"},
-     {:guardian, "~> 0.14"},
-     {:excoveralls, "~> 0.6", only: :test},
-     {:ex_machina, "~> 2.0"}]
+      # Other deps
+      {:yelp_ex, "~> 0.2.1"},
+      {:poison, "~> 3.0"},
+      {:comeonin, "~> 3.0"},
+      {:guardian, "~> 0.14"},
+      {:excoveralls, "~> 0.6", only: :test},
+      {:ex_machina, "~> 2.0"},
+      {:corsica, "~> 1.1"}
+    ]
   end
 
   defp aliases do

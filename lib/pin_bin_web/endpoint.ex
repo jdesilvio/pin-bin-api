@@ -39,4 +39,16 @@ defmodule PinBinWeb.Endpoint do
     signing_salt: "J8rvlxWx"
 
   plug PinBinWeb.Router
+
+  # CORS plug
+  # Will accept CORS requests from a Vue.js frontend
+  # that uses Axios for HTTP requests.
+  # Vue.js development servers go up on port 8080 by default.
+  plug(
+    Corsica,
+    origins: "http://localhost:8080",
+    log: [rejected: :error, invalid: :warn, accepted: :debug],
+    allow_headers: ["content-type"],
+    allow_credentials: true
+  )
 end
