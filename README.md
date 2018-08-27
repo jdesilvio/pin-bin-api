@@ -21,10 +21,10 @@ What I wanted was **a simple system for filing away place of interest AND a smar
 #### _API_
 
     # Sign up for a new account
-    $ curl -X POST 'http://localhost:4000/api/v1/sign_up?email=moe@stooges.com&username=moe&password=abc123'
+    $ curl -X POST 'http://localhost:4000/api/v1/sign_up?email=<EMAIL_ADDRESS>&username=<USERNAME>&password=<PASSWORD>'
 
     # Get your API JSON Web Token (JWT)
-    $ curl -X POST 'http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<YOUR_PASSWORD>'
+    $ curl -X POST 'http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<PASSWORD>'
 
     # Use your JWT to access API endpoints
     $ curl -H "Authorization: Bearer <JWT>" http://localhost:4000/api/v1/users
