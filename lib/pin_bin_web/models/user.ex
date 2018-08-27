@@ -53,9 +53,15 @@ defmodule PinBin.User do
         put_change(changeset,
                    :password_hash,
                    Comeonin.Bcrypt.hashpwsalt(password))
+      _ -> changeset
+    end
+  end
 
-      _ ->
-        changeset
+  defp downcase_email(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{email: email}} ->
+        put_change(changeset, :email, String.downcase(email))
+      _ -> changeset
     end
   end
 end

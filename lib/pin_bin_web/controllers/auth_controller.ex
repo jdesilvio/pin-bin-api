@@ -8,15 +8,14 @@ defmodule PinBinWeb.AuthController do
 
   @token_type "Bearer"
 
-  def show(conn, params) do
-    case PinBinWeb.Auth.api_login_by_email_and_pass(conn, params) do
+  def show(conn, %{"email" => email, "password" => password}) do
+    case PinBinWeb.Auth.api_login_by_email_and_pass(conn, email, password) do
       {:ok, conn} ->
         jwt = Guardian.Plug.current_token(conn)
 
         {:ok, claims} = Guardian.Plug.claims(conn)
         exp = Map.get(claims, "exp")
 
-        %{"email" => email} = params
         user = Accounts.get_user_by_email(email)
         resource = user_path(conn, :show, user)
 

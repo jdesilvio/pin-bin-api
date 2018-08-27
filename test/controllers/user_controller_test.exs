@@ -3,7 +3,6 @@ defmodule PinBinWeb.UserControllerTest do
 
   import Phoenix.ConnTest
   alias PinBin.User
-  alias PinBin.Repo
   alias PinBin.Factory
   alias PinBin.Accounts
 
@@ -52,7 +51,7 @@ defmodule PinBinWeb.UserControllerTest do
 
       assert conn.request_path == "/users/#{current_user.id}"
 
-      user1 = Repo.get(User, current_user.id)
+      user1 = Accounts.get_user(current_user.id)
       assert user1.username == @valid_attrs.username
       assert user1.email == @valid_attrs.email
     end
