@@ -10,7 +10,7 @@ defmodule PinBinWeb.SessionControllerTest do
         |> get(:new)
 
       assert conn.request_path == "/"
-      assert html_response(conn, 200) =~ "Welcome to PinBin!"
+      assert html_response(conn, 200) =~ "Welcome to Pin Bin!"
       assert html_response(conn, 200) =~ "Register"
       assert html_response(conn, 200) =~ "Sign in"
     end

@@ -20,14 +20,18 @@ What I wanted was **a simple system for filing away place of interest AND a smar
 
 #### _API_
 
-    # Get your API JSON Web Token (jwt)
-    curl -X POST 'http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<YOUR_PASSWORD>'
+    # Sign up for a new account
+    $ curl -X POST 'http://localhost:4000/api/v1/sign_up?email=<EMAIL_ADDRESS>&username=<USERNAME>&password=<PASSWORD>'
 
-    # Use your jwt access API endpoints
-    curl -H "Authorization: Bearer <jwt>" http://localhost:4000/api/v1/users/2
+    # Get your API JSON Web Token (JWT)
+    $ curl -X POST 'http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<PASSWORD>'
+
+    # Use your JWT to access API endpoints
+    $ curl -H "Authorization: Bearer <JWT>" http://localhost:4000/api/v1/users
+    $ curl -H "Authorization: Bearer <JWT>" http://localhost:4000/api/v1/users/1
 
     # Yelp endpoint
-    http://localhost:4000/api/v1/yelp?latitude=40&longitude=-75
+    $ http://localhost:4000/api/v1/yelp?latitude=40&longitude=-75
 
 #### _Browser_
 

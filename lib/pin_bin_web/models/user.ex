@@ -2,13 +2,14 @@ defmodule PinBin.User do
   use PinBinWeb, :model
 
   @required_fields ~w(email username password)a
-  @optional_fields ~w()a
+  @optional_fields ~w(admin)a
 
   schema "users" do
     field :email, :string
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :admin, :boolean
     has_many :bins, PinBin.Bin
     has_many :pins, PinBin.Pin
 
@@ -22,8 +23,7 @@ defmodule PinBin.User do
     struct
     |> cast(params, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> unique_constraint(:user_email_index)
-    |> unique_constraint(:user_username_index)
+    |> validate_changeset
   end
 
   @doc """
@@ -31,7 +31,17 @@ defmodule PinBin.User do
   """
   def registration_changeset(struct, params) do
     struct
-    |> changeset(params)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
+    |> validate_changeset
+  end
+
+  defp validate_changeset(struct) do
+    struct
+    |> unique_constraint(:email, [name: :users_email_index])
+    |> unique_constraint(:username, [name: :users_username_index])
+    |> validate_length(:email, min: 5, max: 255)
+    |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 6, max: 100)
     |> hash_password
   end
@@ -48,5 +58,4 @@ defmodule PinBin.User do
         changeset
     end
   end
-
 end
