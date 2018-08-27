@@ -1,7 +1,7 @@
 defmodule PinBinWeb.RegistrationView do
   use PinBinWeb, :view
 
-  def render("success.json", %{user: user}) do
+  def render("success.json", %{user: user, resource: resource}) do
     %{
       status: :ok,
       message: """
