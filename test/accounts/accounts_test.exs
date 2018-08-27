@@ -6,8 +6,16 @@ defmodule PinBin.AccountsTest do
   describe "users" do
     alias PinBin.User
 
-    @valid_attrs %{email: "moe@stooges.com", username: "moe", password: "abc123"}
-    @update_attrs %{email: "larry@stooges.com", username: "larry", password: "321cba"}
+    @valid_attrs %{
+      email: "moe@stooges.com",
+      username: "moe",
+      password: "abc123"
+    }
+    @update_attrs %{
+      email: "larry@stooges.com",
+      username: "larry",
+      password: "321cba"
+    }
     @invalid_attrs %{email: nil, username: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -45,7 +53,7 @@ defmodule PinBin.AccountsTest do
       assert user_.username == user.username
     end
 
-    test "get_user_by_username/1 returns the user with given id" do
+    test "get_user_by_username/1 returns the user with given username" do
       user = user_fixture()
       user_ = Accounts.get_user_by_username(user.username)
       assert user_.id == user.id
@@ -53,7 +61,11 @@ defmodule PinBin.AccountsTest do
       assert user_.username == user.username
     end
 
-    test "get_user_by_username!/1 returns the user with given id" do
+    test "get_user_by_username/1 returns nil" do
+      assert Accounts.get_user_by_username(nil) == nil
+    end
+
+    test "get_user_by_username!/1 returns the user with given username" do
       user = user_fixture()
       user_ = Accounts.get_user_by_username!(user.username)
       assert user_.id == user.id
@@ -61,7 +73,11 @@ defmodule PinBin.AccountsTest do
       assert user_.username == user.username
     end
 
-    test "get_user_by_email/1 returns the user with given id" do
+    test "get_user_by_username!/1 returns nil" do
+      assert Accounts.get_user_by_username!(nil) == nil
+    end
+
+    test "get_user_by_email/1 returns the user with given email" do
       user = user_fixture()
       user_ = Accounts.get_user_by_email(user.email)
       assert user_.id == user.id
@@ -69,12 +85,20 @@ defmodule PinBin.AccountsTest do
       assert user_.username == user.username
     end
 
-    test "get_user_by_email!/1 returns the user with given id" do
+    test "get_user_by_email/1 returns nil" do
+      assert Accounts.get_user_by_email(nil) == nil
+    end
+
+    test "get_user_by_email!/1 returns the user with given email" do
       user = user_fixture()
       user_ = Accounts.get_user_by_email!(user.email)
       assert user_.id == user.id
       assert user_.email == user.email
       assert user_.username == user.username
+    end
+
+    test "get_user_by_email!/1 returns nil" do
+      assert Accounts.get_user_by_email!(nil) == nil
     end
 
     test "create_user/1 with valid data creates a user" do

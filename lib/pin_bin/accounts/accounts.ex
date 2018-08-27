@@ -49,7 +49,10 @@ defmodule PinBin.Accounts do
       nil
   """
   def get_user_by_username(username) do
-    Repo.get_by(User, username: username)
+    case username do
+      nil -> nil
+      _ -> Repo.get_by(User, username: username)
+    end
   end
 
   @doc """
@@ -64,7 +67,10 @@ defmodule PinBin.Accounts do
       ** (Ecto.NoResultsError)
   """
   def get_user_by_username!(username) do
-    Repo.get_by!(User, username: username)
+    case username do
+      nil -> nil
+      _ -> Repo.get_by!(User, username: username)
+    end
   end
 
   @doc """
@@ -78,7 +84,10 @@ defmodule PinBin.Accounts do
       nil
   """
   def get_user_by_email(email) do
-    Repo.get_by(User, email: email)
+    case email do
+      nil -> nil
+      _ -> Repo.get_by(User, email: String.downcase(email))
+    end
   end
 
   @doc """
@@ -93,7 +102,10 @@ defmodule PinBin.Accounts do
       ** (Ecto.NoResultsError)
   """
   def get_user_by_email!(email) do
-    Repo.get_by!(User, email: email)
+    case email do
+      nil -> nil
+      _ -> Repo.get_by!(User, email: String.downcase(email))
+    end
   end
 
   @doc """
