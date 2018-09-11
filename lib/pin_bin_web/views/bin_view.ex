@@ -5,6 +5,10 @@ defmodule PinBinWeb.BinView do
     %{data: render_many(bins, PinBinWeb.BinView, "bin.json")}
   end
 
+  def render("show.json", %{bin: bin}) do
+    %{data: render_one(bin, PinBinWeb.BinView, "bin.json")}
+  end
+
   def render("bin.json", %{bin: bin}) do
     %{id: bin.id,
       name: bin.name,
