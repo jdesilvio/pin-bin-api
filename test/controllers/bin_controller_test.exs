@@ -7,36 +7,69 @@ defmodule PinBinWeb.BinControllerTest do
   alias PinBin.Repo
   alias PinBin.Factory
 
+  @api_path "/api/v1"
   @valid_attrs %{"name" => "my bin"}
 
+  setup %{conn: conn} do
+    user = Factory.insert(:user)
+    {:ok, jwt, _} = Guardian.encode_and_sign(user)
+    conn =
+      conn
+      |> put_req_header("accept", "application/json")
+      |> put_req_header("authorization", "Bearer " <> jwt)
+    {:ok, %{conn: conn, user: user, jwt: jwt}}
+  end
+
   describe "index/3" do
-    test "list bins" do
-      user = Factory.insert(:user)
+    test "list bins", %{conn: conn, user: user} do
       bin1 = Factory.insert(:bin, user: user)
       bin2 = Factory.insert(:bin, user: user)
 
-      conn =
-        session_conn(user)
-        |> get(user_bin_path(conn, :index, user))
+      path = @api_path <> user_bin_path(conn, :index, user)
+      response =
+        conn
+        |> get(path)
+        |> json_response(200)
 
-      html = html_response(conn, 200)
-      assert html =~ bin1.name
-      assert html =~ bin2.name
+      assert response == %{
+        "data" => [
+            %{
+              "id" => bin1.id,
+              "is_public" => bin1.is_public,
+              "name" => bin1.name,
+              "short_name" => bin1.short_name
+            },
+            %{
+              "id" => bin2.id,
+              "is_public" => bin2.is_public,
+              "name" => bin2.name,
+              "short_name" => bin2.short_name
+            }
+          ]
+        }
     end
 
-    test "only lists current user's bins" do
-      user1 = Factory.insert(:user)
+    test "only lists current user's bins", %{conn: conn, user: user} do
       user2 = Factory.insert(:user)
-      bin1 = Factory.insert(:bin, user: user1)
+      bin1 = Factory.insert(:bin, user: user)
       bin2 = Factory.insert(:bin, user: user2)
 
-      conn =
-        session_conn(user1)
-        |> get(user_bin_path(conn, :index, user1))
+      path = @api_path <> user_bin_path(conn, :index, user)
+      response =
+        conn
+        |> get(path)
+        |> json_response(200)
 
-      html = html_response(conn, 200)
-      assert html =~ bin1.name
-      refute html =~ bin2.name
+      assert response == %{
+        "data" => [
+            %{
+              "id" => bin1.id,
+              "is_public" => bin1.is_public,
+              "name" => bin1.name,
+              "short_name" => bin1.short_name
+            }
+          ]
+        }
     end
   end
 
