@@ -47,8 +47,8 @@ defmodule PinBinWeb.Router do
       pipe_through [:api_auth, :login_required]
 
       resources "/users", UserController, only: [:show, :index] do
-        resources "/bins", BinController do
-          resources "/pins", PinController
+        resources "/bins", BinController, except: [:new, :edit] do
+          resources "/pins", PinController, except: [:new, :edit]
         end
       end
     end
