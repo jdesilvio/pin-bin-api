@@ -8,7 +8,7 @@ defmodule PinBinWeb.BinControllerTest do
   alias PinBin.Factory
 
   @api_path "/api/v1"
-  @valid_attrs %{"name" => "my bin"}
+  @valid_attrs %{"name" => "my bin", "is_public" => true}
 
   setup %{conn: conn} do
     user = Factory.insert(:user)
@@ -73,105 +73,75 @@ defmodule PinBinWeb.BinControllerTest do
     end
   end
 
-  describe "new/3" do
-    test "new bin" do
-      user = Factory.insert(:user)
-
-      conn =
-        session_conn(user)
-        |> get(user_bin_path(conn, :new, user))
-
-      html = html_response(conn, 200)
-      assert html =~ "Create Bin"
-    end
-  end
-
   describe "create/3" do
-    test "create bin" do
+    test "create bin", %{conn: conn} do
       user = Factory.insert(:user)
 
-      conn =
-        session_conn(user)
-        |> post(user_bin_path(conn, :create, user, bin: @valid_attrs))
+      path = @api_path <> user_bin_path(conn, :create, user, bin: @valid_attrs)
+      response =
+        conn
+        |> post(path)
+        |> json_response(201)
 
-      assert get_flash(conn)["info"] == "Bin was created successfully!"
-
-      redir_path = redirected_to(conn)
-      conn = get(recycle(conn), redir_path)
-
-      html = html_response(conn, 200)
-      assert html =~ @valid_attrs["name"]
+      assert response["data"]["name"] == @valid_attrs["name"]
     end
   end
 
   describe "show/3" do
-    test "show bin" do
+    test "show bin", %{conn: conn} do
       user = Factory.insert(:user)
       bin = Factory.insert(:bin, user: user)
 
-      conn =
-        session_conn(user)
-        |> get(user_bin_path(conn, :show, user.id, bin.id))
+      path = @api_path <> user_bin_path(conn, :show, user.id, bin.id)
+      response =
+        conn
+        |> get(path)
+        |> json_response(200)
 
-      html = html_response(conn, 200)
-      assert html =~ bin.name
-    end
-  end
-
-  describe "edit/3" do
-    test "edit bin" do
-      user = Factory.insert(:user)
-      bin = Factory.insert(:bin, user: user)
-
-      conn =
-        session_conn(user)
-        |> get(user_bin_path(conn, :edit, user, bin))
-
-      html = html_response(conn, 200)
-      assert html =~ "Edit Bin"
-      assert html =~ bin.name
+      assert response == %{
+        "data" => %{
+          "id" => bin.id,
+          "is_public" => bin.is_public,
+          "name" => bin.name,
+          "short_name" => bin.short_name
+        }
+      }
     end
   end
 
   describe "update/3" do
-    test "update bin" do
-      user = Factory.insert(:user)
+    test "update bin", %{conn: conn, user: user} do
       bin = Factory.insert(:bin, user: user)
       new_params = %{"name" => "new name"}
-      new_bin = %{bin | name: "new name"}
-      IO.inspect new_bin
 
-      conn =
-        session_conn(user)
-        |> patch(user_bin_path(conn, :update, user, bin.id, bin: new_params))
+      path = @api_path <> user_bin_path(conn, :update, user, bin.id, bin: new_params)
+      response =
+        conn
+        |> patch(path)
+        |> json_response(200)
 
-      assert get_flash(conn)["info"] == "Bin was updated successfully!"
-
-      redir_path = redirected_to(conn)
-      conn = get(recycle(conn), redir_path)
-
-      html = html_response(conn, 200)
-      assert html =~ "new name"
-      refute html =~ bin.name
+      assert response == %{
+        "data" => %{
+          "id" => bin.id,
+          "is_public" => bin.is_public,
+          "name" => "new name",
+          "short_name" => "new_name"
+        }
+      }
     end
   end
 
   describe "delete/3" do
-    test "delete bin" do
-      user = Factory.insert(:user)
+    test "delete bin", %{conn: conn, user: user} do
       bin = Factory.insert(:bin, user: user)
 
-      conn =
-        session_conn(user)
-        |> delete(user_bin_path(conn, :delete, user, bin))
+      path =  @api_path <> user_bin_path(conn, :delete, user, bin)
+      response =
+        conn
+        |> delete(path)
+        |> response(204)
 
-      assert get_flash(conn)["info"] == "Bin was deleted successfully!"
-
-      redir_path = redirected_to(conn)
-      conn = get(recycle(conn), redir_path)
-
-      html = html_response(conn, 200)
-      refute html =~ bin.name
+      assert response == ""
     end
   end
 end
