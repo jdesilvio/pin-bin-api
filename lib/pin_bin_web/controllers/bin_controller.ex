@@ -4,7 +4,6 @@ defmodule PinBinWeb.BinController do
   alias PinBin.Bin
   alias PinBin.User
 
-  plug :scrub_params, "bin" when action in [:create, :update]
   plug PinBinWeb.AssignCurrentUser
 
   def action(conn, _) do
@@ -24,13 +23,13 @@ defmodule PinBinWeb.BinController do
     render(conn, :index, bins: bins, user: user)
   end
 
-  def create(conn, %{"bin" => bin_params}, current_user) do
-    derived_bin_params = bin_params |> derive_params
+  def create(conn, %{"bin" => params}, current_user) do
+    derived_params = params |> derive_params
 
     changeset =
       current_user
       |> build_assoc(:bins)
-      |> Bin.changeset(derived_bin_params)
+      |> Bin.changeset(derived_params)
 
     case Repo.insert(changeset) do
       {:ok, bin} ->
@@ -56,10 +55,10 @@ defmodule PinBinWeb.BinController do
     render(conn, :show, bin: bin, user: current_user)
   end
 
-  def update(conn, %{"id" => id, "bin" => bin_params}, current_user) do
+  def update(conn, %{"bin" => params, "id" => id}, current_user) do
     bin = Bin |> Repo.get!(id)
-    derived_bin_params = bin_params |> derive_params
-    changeset = Bin.changeset(bin, derived_bin_params)
+    derived_params = params |> derive_params
+    changeset = Bin.changeset(bin, derived_params)
 
     case Repo.update(changeset) do
       {:ok, bin} ->
@@ -80,15 +79,15 @@ defmodule PinBinWeb.BinController do
     send_resp(conn, :no_content, "")
   end
 
-  defp derive_params(bin_params) do
-    short_name = case bin_params["name"] do
-      nil -> bin_params
-      _ -> bin_params["name"]
+  defp derive_params(params) do
+    short_name = case params["name"] do
+      nil -> params
+      _ -> params["name"]
            |> String.downcase
            |> String.trim
            |> String.replace(" ", "_")
     end
 
-    Map.put(bin_params, "short_name", short_name)
+    Map.put(params, "short_name", short_name)
   end
 end
