@@ -44,6 +44,7 @@ defmodule PinBin.User do
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 6, max: 100)
     |> hash_password
+    |> downcase_email
   end
 
   defp hash_password(changeset) do
