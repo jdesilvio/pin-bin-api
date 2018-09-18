@@ -4,7 +4,7 @@ defmodule PinBinWeb.BinController do
   alias PinBin.Bin
   alias PinBin.User
 
-  plug :scrub_params, "bin" when action in [:create, :update]
+  plug PinBinWeb.AssignCurrentUser
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
@@ -23,26 +23,26 @@ defmodule PinBinWeb.BinController do
     render(conn, :index, bins: bins, user: user)
   end
 
-  def new(conn, _params, current_user) do
-    changeset = Bin.changeset(%Bin{})
-    render(conn, :new, changeset: changeset)
-  end
-
-  def create(conn, %{"bin" => bin_params}, current_user) do
-    derived_bin_params = bin_params |> derive_params
+  def create(conn, %{"bin" => params}, current_user) do
+    derived_params = params |> derive_params
 
     changeset =
       current_user
       |> build_assoc(:bins)
-      |> Bin.changeset(derived_bin_params)
+      |> Bin.changeset(derived_params)
 
     case Repo.insert(changeset) do
-      {:ok, _} ->
+      {:ok, bin} ->
+        resource = user_bin_path(conn, :show, current_user.id, bin.id)
+
         conn
-        |> put_flash(:info, "Bin was created successfully!")
-        |> redirect(to: user_bin_path(conn, :index, current_user))
+        |> put_status(:created)
+        |> put_resp_header("resource", resource)
+        |> render(:show, user: current_user, bin: bin)
       {:error, changeset} ->
-        render(conn, :new, changeset: changeset)
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(:error, changeset: changeset)
     end
   end
 
@@ -55,46 +55,39 @@ defmodule PinBinWeb.BinController do
     render(conn, :show, bin: bin, user: current_user)
   end
 
-  def edit(conn, %{"id" => id}, current_user) do
+  def update(conn, %{"bin" => params, "id" => id}, current_user) do
     bin = Bin |> Repo.get!(id)
-
-    changeset = Bin.changeset(bin)
-
-    render(conn, :edit, bin: bin, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "bin" => bin_params}, current_user) do
-    bin = Bin |> Repo.get!(id)
-    derived_bin_params = bin_params |> derive_params
-    changeset = Bin.changeset(bin, derived_bin_params)
+    derived_params = params |> derive_params
+    changeset = Bin.changeset(bin, derived_params)
 
     case Repo.update(changeset) do
       {:ok, bin} ->
+        resource = user_bin_path(conn, :show, current_user.id, bin.id)
+
         conn
-        |> put_flash(:info, "Bin was updated successfully!")
-        |> redirect(to: user_bin_path(conn, :show, current_user, bin))
+        |> put_resp_header("resource", resource)
+        |> render(:show, user: current_user, bin: bin)
       {:error, changeset} ->
-        render(conn, :edit, bin: bin, changeset: changeset)
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(:error, changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}, current_user) do
     Bin |> Repo.get!(id) |> Repo.delete!
-
-    conn
-    |> put_flash(:info, "Bin was deleted successfully!")
-    |> redirect(to: user_bin_path(conn, :index, current_user))
+    send_resp(conn, :no_content, "")
   end
 
-  defp derive_params(bin_params) do
-    short_name = case bin_params["name"] do
-      nil -> bin_params
-      _ -> bin_params["name"]
+  defp derive_params(params) do
+    short_name = case params["name"] do
+      nil -> params
+      _ -> params["name"]
            |> String.downcase
            |> String.trim
            |> String.replace(" ", "_")
     end
 
-    Map.put(bin_params, "short_name", short_name)
+    Map.put(params, "short_name", short_name)
   end
 end
