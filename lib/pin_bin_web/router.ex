@@ -33,14 +33,7 @@ defmodule PinBinWeb.Router do
     pipe_through [:api]
 
     post "/sign_up", RegistrationController, :sign_up
-
     post "/auth", AuthController, :show
-
-    resources "/users", UserController, only: [:new, :create]
-
-
-    get "/yelp", YelpController, :index
-    post "/yelp", YelpController, :index
 
     # Authenticated user
     scope "/"  do
@@ -51,6 +44,9 @@ defmodule PinBinWeb.Router do
           resources "/pins", PinController, except: [:new, :edit]
         end
       end
+
+      get "/yelp", YelpController, :index
+      post "/yelp", YelpController, :index
     end
   end
 
