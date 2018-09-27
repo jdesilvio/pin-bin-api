@@ -11,13 +11,11 @@ defmodule PinBinWeb.PinController do
           [conn, conn.params, conn.assigns.current_user])
   end
 
-  def index(conn, params, current_user) do
-    %{"bin_id" => bin_id} = params
-
+  def index(conn, %{"bin_id" => bin_id}, current_user) do
     bin = Bin |> Repo.get!(bin_id)
-
     pins =
-      assoc(bin, :pins)
+      bin
+      |> assoc(:pins)
       |> Repo.all
       |> Repo.preload(:user)
       |> Repo.preload(:bin)
@@ -25,19 +23,13 @@ defmodule PinBinWeb.PinController do
     render(conn, :index, pins: pins, bin: bin, user: current_user)
   end
 
-  def new(conn, params, _current_user) do
-    %{"bin_id" => bin_id} = params
-
+  def new(conn, %{"bin_id" => bin_id}, _current_user) do
     bin = Bin |> Repo.get!(bin_id)
-
     changeset = Pin.changeset(%Pin{})
-
     render(conn, :new, changeset: changeset, bin: bin)
   end
 
-  def create(conn, params, current_user) do
-    %{"pin" => pin, "bin_id" => bin_id} = params
-
+  def create(conn, %{"pin" => pin, "bin_id" => bin_id}, current_user) do
     bin = Bin |> Repo.get!(bin_id)
 
     changeset =
@@ -46,33 +38,24 @@ defmodule PinBinWeb.PinController do
       |> Pin.changeset(pin)
 
     case Repo.insert(changeset) do
-      {:ok, _} ->
+      {:ok, pin} ->
+        resource = user_bin_pin_path(conn, :show, current_user.id, bin.id, pin.id)
+
         conn
-        |> put_flash(:info, "Pin created successfully.")
-        |> redirect(to: user_bin_pin_path(conn, :index, current_user, bin))
+        |> put_status(:created)
+        |> put_resp_header("resource", resource)
+        |> render(:show, user: current_user, bin: bin, pin: pin)
       {:error, changeset} ->
-        render(conn, :new, changeset: changeset)
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(:error, changeset: changeset)
     end
   end
 
-  def show(conn, params, current_user) do
-    %{"id" => id, "bin_id" => bin_id} = params
-
+  def show(conn, %{"id" => id, "bin_id" => bin_id}, current_user) do
     bin = Bin |> Repo.get!(bin_id)
     pin = Pin |> Repo.get!(id)
-
     render(conn, :show, pin: pin, bin: bin, user: current_user)
-  end
-
-  def edit(conn, params, current_user) do
-    %{"id" => id, "bin_id" => bin_id} = params
-
-    bin = Bin |> Repo.get!(bin_id)
-    pin = Pin |> Repo.get!(id)
-
-    changeset = Pin.changeset(pin)
-
-    render(conn, :edit, pin: pin, bin: bin, user: current_user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pin" => pin_params}, current_user) do
@@ -83,22 +66,22 @@ defmodule PinBinWeb.PinController do
 
     case Repo.update(changeset) do
       {:ok, pin} ->
+        resource = user_bin_pin_path(conn, :show, current_user.id, bin.id, pin.id)
+
         conn
-        |> put_flash(:info, "Pin updated successfully.")
-        |> redirect(to: user_bin_pin_path(conn, :show, current_user, bin, pin))
+        |> put_resp_header("resource", resource)
+        |> render(:show, user: current_user, bin: bin, pin: pin)
       {:error, changeset} ->
-        render(conn, :edit, pin: pin, changeset: changeset)
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(:error, changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}, current_user) do
     pin = Pin |> Repo.get!(id)
     bin = Bin |> Repo.get!(pin.bin_id)
-
     Repo.delete!(pin)
-
-    conn
-    |> put_flash(:info, "Pin deleted successfully.")
-    |> redirect(to: user_bin_pin_path(conn, :index, current_user, bin))
+    send_resp(conn, :no_content, "")
   end
 end
