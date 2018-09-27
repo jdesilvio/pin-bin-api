@@ -2,31 +2,34 @@ defmodule PinBinWeb.YelpController do
   use PinBinWeb, :controller
 
   def index(conn, params) do
-    case conn.request_path do
-      "/yelp" ->
-        conn
-        |> assign(:yelp, yelp_search!(params["search"]))
-        |> render(:index)
-      "/api/v1/yelp" ->
-        render conn, "index.json", yelp: yelp_search!(params)
-    end
+    render conn, "index.json", yelp: yelp_search!(params)
   end
 
   defp yelp_search!(params) do
-    if scrub_param(params["latitude"]) == nil or scrub_param(params["longitude"]) == nil do
-      nil
-    else
-      %{"latitude" => lat, "longitude" => long} = params
-      options = [params: [longitude: long, latitude: lat]]
-      YelpEx.Client.search!(options)
+    params = scrub_params(params)
+    %{"latitude" => lat, "longitude" => long} = params
+    cond do
+      lat == nil -> nil
+      long == nil -> nil
+      true -> [params: [longitude: long, latitude: lat]]
+              |> YelpEx.Client.search!()
     end
   end
 
-  defp scrub_param(param) do
-    case param do
+  def scrub_params(params) do
+    {:ok, params} =
+      Map.get_and_update(params, "latitude", &scrub_param/1)
+    {:ok, params} =
+      Map.get_and_update(params, "longitude", &scrub_param/1)
+    params
+  end
+
+  def scrub_param(param) do
+    scrubbed_param = case param do
       nil -> nil
       "" -> nil
       _ -> param
     end
+    {:ok, scrubbed_param}
   end
 end
