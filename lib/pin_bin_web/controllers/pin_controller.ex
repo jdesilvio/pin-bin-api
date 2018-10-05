@@ -23,12 +23,6 @@ defmodule PinBinWeb.PinController do
     render(conn, :index, pins: pins, bin: bin, user: current_user)
   end
 
-  def new(conn, %{"bin_id" => bin_id}, _current_user) do
-    bin = Bin |> Repo.get!(bin_id)
-    changeset = Pin.changeset(%Pin{})
-    render(conn, :new, changeset: changeset, bin: bin)
-  end
-
   def create(conn, %{"pin" => pin, "bin_id" => bin_id}, current_user) do
     bin = Bin |> Repo.get!(bin_id)
 
