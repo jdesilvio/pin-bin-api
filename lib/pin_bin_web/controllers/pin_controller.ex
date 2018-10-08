@@ -4,7 +4,7 @@ defmodule PinBinWeb.PinController do
   alias PinBin.Pin
   alias PinBin.Bin
 
-  plug :scrub_params, "pin" when action in [:create, :update]
+  plug PinBinWeb.AssignCurrentUser
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),

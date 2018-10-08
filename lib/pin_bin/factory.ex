@@ -28,7 +28,7 @@ defmodule PinBin.Factory do
       id: sequence(:id, &(&1 + 1)),
       name: sequence(:name, &"pin-#{&1 + 1}"),
       latitude: 99.99,
-      latitude: 11.11,
+      longitude: 11.11,
       user: build(:user),
       bin: build(:bin)
     }

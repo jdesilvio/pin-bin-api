@@ -8,7 +8,7 @@ defmodule PinBinWeb.PinView do
   def render("pin.json", %{pin: pin}) do
     %{id: pin.id,
       name: pin.name,
-      latitude: pin.lattitude,
+      latitude: pin.latitude,
       longitude: pin.longitude}
   end
 
