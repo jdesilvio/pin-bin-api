@@ -24,15 +24,21 @@ defmodule PinBinWeb.PinControllerTest do
       pin = Factory.insert(:pin, user: user, bin: bin)
 
       path = @api_path <> user_bin_pin_path(conn, :index, user, bin)
-
       response =
         conn
         |> get(path)
         |> json_response(200)
 
-      IO.inspect response
-
-      assert response == %{}
+      assert response == %{
+        "data" => [
+          %{
+            "id" => pin.id,
+            "latitude" => pin.latitude,
+            "longitude" => pin.longitude,
+            "name" => pin.name
+          }
+        ]
+      }
     end
 
     test "list only pins associated with bin", %{conn: conn, user: user} do
@@ -50,7 +56,10 @@ defmodule PinBinWeb.PinControllerTest do
         |> get(path)
         |> json_response(200)
 
-      assert response == %{}
+      %{"data" => pins} = response
+      assert length(pins) == 2
+      assert Enum.at(pins, 0)["id"] in [pin1.id, pin2.id]
+      assert Enum.at(pins, 1)["id"] in [pin1.id, pin2.id]
     end
   end
 
