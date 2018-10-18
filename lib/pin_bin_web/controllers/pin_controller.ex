@@ -39,10 +39,10 @@ defmodule PinBinWeb.PinController do
         |> put_status(:created)
         |> put_resp_header("resource", resource)
         |> render(:show, user: current_user, bin: bin, pin: pin)
-      {:error, changeset} ->
+      {:error, reason} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(:error, changeset: changeset)
+        |> render(PinBinWeb.ErrorView, :error, reason: reason)
     end
   end
 
@@ -65,10 +65,10 @@ defmodule PinBinWeb.PinController do
         conn
         |> put_resp_header("resource", resource)
         |> render(:show, user: current_user, bin: bin, pin: pin)
-      {:error, changeset} ->
+      {:error, reason} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(:error, changeset: changeset)
+        |> render(PinBinWeb.ErrorView, :error, reason: reason)
     end
   end
 

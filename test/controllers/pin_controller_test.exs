@@ -63,36 +63,32 @@ defmodule PinBinWeb.PinControllerTest do
     end
   end
 
-  #  describe "create/3" do
-  #    test "new pin is created", %{conn: conn, user: user, bin: bin} do
-  #      path = @api_path <> user_bin_pin_path(conn, :create, user, bin, pin: @valid_attrs)
-  #      response =
-  #        conn
-  #        |> post(path)
-  #        |> json_response(200)
-  #
-  #      assert response = %{}
-  #    end
-  #
-  #    #    test "new pin is not created with invalid attributes" do
-  #    #      user = Factory.insert(:user)
-  #    #      bin = Factory.insert(:bin, user: user)
-  #    #
-  #    #      conn =
-  #    #        session_conn(user)
-  #    #        |> post(user_bin_pin_path(conn, :create, user, bin, pin: @invalid_attrs))
-  #    #
-  #    #      assert get_flash(conn)["info"] == "Pin created successfully."
-  #    #
-  #    #      redir_path = redirected_to(conn)
-  #    #      conn = get(recycle(conn), redir_path)
-  #    #
-  #    #      html = html_response(conn, 200)
-  #    #      assert html =~ @valid_attrs.name
-  #    #    end
-  #
-  #  end
-  #
+  describe "create/3" do
+    test "new pin is created", %{conn: conn, user: user, bin: bin} do
+      path = @api_path <> user_bin_pin_path(conn, :create, user, bin, pin: @valid_attrs)
+      response =
+        conn
+        |> post(path)
+        |> json_response(201)
+
+      %{"data" => pin} = response
+      assert pin["name"] == @valid_attrs.name
+      assert {pin["latitude"], ""} == Float.parse(@valid_attrs.latitude)
+      assert {pin["longitude"], ""} == Float.parse(@valid_attrs.longitude)
+    end
+
+    test "new pin is not created with invalid attributes", %{conn: conn, user: user, bin: bin} do
+      path = @api_path <> user_bin_pin_path(conn, :create, user, bin, pin: @invalid_attrs)
+      response =
+        conn
+        |> post(path)
+        |> json_response(422)
+
+      assert response["status"] == "error"
+      assert response["message"] == "An error occurred."
+    end
+  end
+
   #  describe "show/3" do
   #    test "show pin", %{conn: conn, user: user, bin: bin} do
   #      pin = Factory.insert(:pin, user: user, bin: bin)
