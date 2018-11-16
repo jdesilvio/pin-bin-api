@@ -3,6 +3,7 @@ defmodule PinBinWeb.PinControllerTest do
 
   import Phoenix.ConnTest
   alias PinBin.Factory
+  alias PinBin.Pin
 
   @api_path "/api/v1"
   @valid_attrs %{latitude: "120.5", longitude: "120.5", name: "some pin"}
@@ -132,17 +133,18 @@ defmodule PinBinWeb.PinControllerTest do
     end
   end
 
-  #  describe "delete/3" do
-  #    test "delete pin", %{conn: conn, user: user, bin: bin} do
-  #      pin = Factory.insert(:pin, user: user, bin: bin)
-  #
-  #      path = @api_path <> user_bin_pin_path(conn, :delete, user, bin, pin)
-  #      response =
-  #        conn
-  #        |> delete(path)
-  #        |> json_response(200)
-  #
-  #      assert response = %{}
-  #    end
-  #  end
+  describe "delete/3" do
+    test "delete pin", %{conn: conn, user: user, bin: bin} do
+      pin = Factory.insert(:pin, user: user, bin: bin)
+
+      path = @api_path <> user_bin_pin_path(conn, :delete, user, bin, pin)
+      response =
+        conn
+        |> delete(path)
+        |> response(204)
+
+      assert response == ""
+      refute Repo.get(Pin, pin.id)
+    end
+  end
 end
