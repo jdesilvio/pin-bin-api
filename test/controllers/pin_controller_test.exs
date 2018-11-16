@@ -89,21 +89,28 @@ defmodule PinBinWeb.PinControllerTest do
     end
   end
 
-  #  describe "show/3" do
-  #    test "show pin", %{conn: conn, user: user, bin: bin} do
-  #      pin = Factory.insert(:pin, user: user, bin: bin)
-  #
-  #      path = @api_path <> user_bin_pin_path(conn, :show, user, bin, pin)
-  #      response =
-  #        conn
-  #        |> get(path)
-  #        |> json_response(200)
-  #
-  #      assert response = %{}
-  #    end
-  #
-  #  end
-  #
+  describe "show/3" do
+    test "show pin", %{conn: conn, user: user, bin: bin} do
+      pin = Factory.insert(:pin, user: user, bin: bin)
+
+      path = @api_path <> user_bin_pin_path(conn, :show, user, bin, pin)
+      response =
+        conn
+        |> get(path)
+        |> json_response(200)
+
+      assert response == %{
+        "data" => %{
+          "id" => pin.id,
+          "name" => pin.name,
+          "latitude" => pin.latitude,
+          "longitude" => pin.longitude
+        }
+      }
+    end
+
+  end
+
   #  describe "update/3" do
   #    test "update pin", %{conn: conn, user: user, bin: bin} do
   #      pin = Factory.insert(:pin, user: user, bin: bin)
