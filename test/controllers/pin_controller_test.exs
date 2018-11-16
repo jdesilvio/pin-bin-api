@@ -108,24 +108,30 @@ defmodule PinBinWeb.PinControllerTest do
         }
       }
     end
-
   end
 
-  #  describe "update/3" do
-  #    test "update pin", %{conn: conn, user: user, bin: bin} do
-  #      pin = Factory.insert(:pin, user: user, bin: bin)
-  #      new_params = %{"name" => "new name", "longitude" => 99}
-  #
-  #      path = @api_path <> user_bin_pin_path(conn, :update, user, bin.id, pin.id, pin: new_params)
-  #      response =
-  #        conn
-  #        |> patch(path)
-  #        |> json_response(200)
-  #
-  #      assert response = %{}
-  #    end
-  #  end
-  #
+  describe "update/3" do
+    test "update pin", %{conn: conn, user: user, bin: bin} do
+      pin = Factory.insert(:pin, user: user, bin: bin)
+      new_params = %{"name" => "new xxx name", "longitude" => 11}
+
+      path = @api_path <> user_bin_pin_path(conn, :update, user, bin.id, pin.id, pin: new_params)
+      response =
+        conn
+        |> patch(path)
+        |> json_response(200)
+
+      assert response == %{
+        "data" => %{
+          "id" => pin.id,
+          "name" => new_params["name"],
+          "latitude" => pin.latitude,
+          "longitude" => new_params["longitude"]
+        }
+      }
+    end
+  end
+
   #  describe "delete/3" do
   #    test "delete pin", %{conn: conn, user: user, bin: bin} do
   #      pin = Factory.insert(:pin, user: user, bin: bin)
