@@ -12,13 +12,4 @@ defmodule PinBinWeb.RegistrationView do
       """
     }
   end
-
-  def render("error.json", %{changeset: changeset}) do
-    %{
-      status: :error,
-      message: "An error occurred.",
-      errors: translate_errors(changeset)
-    }
-  end
-
 end
