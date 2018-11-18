@@ -11,25 +11,24 @@ defmodule PinBinWeb.BinController do
           [conn, conn.params, conn.assigns.current_user])
   end
 
-  def index(conn, %{"user_id" => user_id}, _current_user) do
-    user = User |> Repo.get!(user_id)
-
+  def index(conn, _params, current_user) do
     bins =
-      user
+      User
+      |> Repo.get!(current_user.id)
       |> assoc(:bins)
       |> Repo.all
       |> Repo.preload(:user)
 
-    render(conn, :index, bins: bins, user: user)
+    render(conn, :index, bins: bins, user: current_user)
   end
 
-  def create(conn, %{"bin" => params}, current_user) do
-    derived_params = params |> derive_params
+  def create(conn, %{"bin" => bin}, current_user) do
+    bin = bin |> derive_params
 
     changeset =
       current_user
       |> build_assoc(:bins)
-      |> Bin.changeset(derived_params)
+      |> Bin.changeset(bin)
 
     case Repo.insert(changeset) do
       {:ok, bin} ->
@@ -58,6 +57,7 @@ defmodule PinBinWeb.BinController do
   def update(conn, %{"bin" => params, "id" => id}, current_user) do
     bin = Bin |> Repo.get!(id)
     derived_params = params |> derive_params
+
     changeset = Bin.changeset(bin, derived_params)
 
     case Repo.update(changeset) do

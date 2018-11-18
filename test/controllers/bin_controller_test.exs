@@ -2,9 +2,7 @@ defmodule PinBinWeb.BinControllerTest do
   use PinBinWeb.ConnCase
 
   import Phoenix.ConnTest
-  alias PinBin.User
   alias PinBin.Bin
-  alias PinBin.Repo
   alias PinBin.Factory
 
   @api_path "/api/v1"
@@ -142,6 +140,7 @@ defmodule PinBinWeb.BinControllerTest do
         |> response(204)
 
       assert response == ""
+      refute Repo.get(Bin, bin.id)
     end
   end
 end
