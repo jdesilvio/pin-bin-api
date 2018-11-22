@@ -2,39 +2,71 @@
 
 ---
 
-The inspiration for this application came when I moved to Philadelphia. I saw a lot of cool restaurants, bars, and stores that I wanted to remember to go to. I started making a list, but then I'd never remember to refer to the list.
+The inspiration for this application came when I moved to Philadelphia.
+I saw a lot of cool restaurants, bars, and stores that I wanted to
+remember to go to. I started making a list, but then I'd never remember
+to refer to the list.
 
-What I wanted was **a simple system for filing away place of interest AND a smart alert system** to tell me when I was close to one of them or present me with suggestions at time that I am likely to be loking for a place to eat, shop or hangout...
+What I wanted was **a simple system for filing away place of interest
+AND a smart alert system** to tell me when I was close to one of them
+or present me with suggestions at times that I am likely to be looking
+for a place to eat, shop or hangout.
 
+---
 
-### The general scope of this app:
+## API Usage
 
-* Mobile only
-* Uses geo-location and the Yelp API to determine places in the user's immediate proximity
-* An elegant, minimal UI:
-    * Wake-up screen that presents potential places of interest and a mechanism for getting them to a bin or discarding them
-    * A way for users to manage bins (should be no more than 4 bins for screen real estate reasons)
-    * A way for users to explore their bins
-    * Alert settings
-    * Account settings
+### Sign up and authentication
 
-### Examples:
+```bash
+# Sign up for a new account
+$ curl -X POST http://localhost:4000/api/v1/sign_up?email=<EMAIL_ADDRESS>&username=<USERNAME>&password=<PASSWORD>
 
-#### _API_
+# Get an API JSON Web Token (JWT)
+$ curl -X POST http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<PASSWORD>
+```
 
-    # Sign up for a new account
-    $ curl -X POST 'http://localhost:4000/api/v1/sign_up?email=<EMAIL_ADDRESS>&username=<USERNAME>&password=<PASSWORD>'
+### Use a JWT to access API endpoints
 
-    # Get your API JSON Web Token (JWT)
-    $ curl -X POST 'http://localhost:4000/api/v1/auth?email=<EMAIL_ADDRESS>&password=<PASSWORD>'
+```bash
+## /users
 
-    # Use your JWT to access API endpoints
-    $ curl -H "Authorization: Bearer <JWT>" http://localhost:4000/api/v1/users
-    $ curl -H "Authorization: Bearer <JWT>" http://localhost:4000/api/v1/users/1
+# List users
+$ curl -X GET http://localhost:4000/api/v1/users -H 'Authorization: Bearer <JWT>'
 
-    # Yelp endpoint
-    $ http://localhost:4000/api/v1/yelp?latitude=40&longitude=-75
+# Get details of a user
+$ curl -X GET http://localhost:4000/api/v1/users/1 -H 'Authorization: Bearer <JWT>'
 
-#### _Browser_
+## /bins
 
-    http://localhost:4000/yelp
+# List a users' bins
+$ curl -X GET http://localhost:4000/api/v1/users/1/bins -H 'Authorization: Bearer <JWT>'
+
+# Get details of a bin
+$ curl -X GET http://localhost:4000/api/v1/users/1/bins/1 -H 'Authorization: Bearer <JWT>'
+
+# Create a Bin
+$ curl -X POST http://localhost:4000/api/v1/users/1/bins -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "my bin"}}'
+
+# Update a bin
+$ curl -X PATCH http://localhost:4000/api/v1/users/1/bins/1 -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "new name"}}'
+
+## /pins
+
+# List a users' bins
+$ curl -X GET http://localhost:4000/api/v1/users/1/bins/1/pins -H 'Authorization: Bearer <JWT>'
+
+# Get details of a bin
+$ curl -X GET http://localhost:4000/api/v1/users/1/bins/1/pins/1 -H 'Authorization: Bearer <JWT>'
+
+# Create a Bin
+$ curl -X POST http://localhost:4000/api/v1/users/1/bins/1/pins -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "my pin", "latitude": 39.9526, "longitude": -75.1652}}'
+
+# Update a bin
+$ curl -X PATCH http://localhost:4000/api/v1/users/1/bins/1/pins/1 -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "new name"}}'
+
+## /yelp
+
+# Get nearby businesses from the Yelp Fusion API
+$ curl -X GET http://localhost:4000/api/v1/yelp?latitude=39.9526&longitude=-75.1652
+```
