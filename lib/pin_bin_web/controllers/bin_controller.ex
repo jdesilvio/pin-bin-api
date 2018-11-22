@@ -41,7 +41,7 @@ defmodule PinBinWeb.BinController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(:error, changeset: changeset)
+        |> render(PinBinWeb.ErrorView, "error.json", changeset: changeset)
     end
   end
 
@@ -70,7 +70,7 @@ defmodule PinBinWeb.BinController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(:error, changeset: changeset)
+        |> render(PinBinWeb.ErrorView, "error.json", changeset: changeset)
     end
   end
 
