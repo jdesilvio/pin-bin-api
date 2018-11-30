@@ -1,7 +1,0 @@
-<div class="jumbotron">
-  <h2><%= "Welcome to Pin Bin!" %></h2>
-  <p class="lead">An app to save all those places you want to go to, but can never remember.</p>
-</div>
-
-<div class="row marketing">
-</div>
