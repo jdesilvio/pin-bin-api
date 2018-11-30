@@ -79,7 +79,7 @@ defmodule PinBinWeb.Router do
   end
 
   pipeline :api_auth do
-    plug PinBinWeb.InspectConn #TODO remove <<<
+    # Placeholder
   end
 
 end
