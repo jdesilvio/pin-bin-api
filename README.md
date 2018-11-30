@@ -37,6 +37,7 @@ $ curl -X GET http://localhost:4000/api/v1/users -H 'Authorization: Bearer <JWT>
 # Get details of a user
 $ curl -X GET http://localhost:4000/api/v1/users/1 -H 'Authorization: Bearer <JWT>'
 
+
 ## /bins
 
 # List a users' bins
@@ -45,25 +46,33 @@ $ curl -X GET http://localhost:4000/api/v1/users/1/bins -H 'Authorization: Beare
 # Get details of a bin
 $ curl -X GET http://localhost:4000/api/v1/users/1/bins/1 -H 'Authorization: Bearer <JWT>'
 
-# Create a Bin
+# Create a bin
 $ curl -X POST http://localhost:4000/api/v1/users/1/bins -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "my bin"}}'
 
 # Update a bin
 $ curl -X PATCH http://localhost:4000/api/v1/users/1/bins/1 -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "new name"}}'
 
+# Delete a bin
+$ curl -X DELETE http://localhost:4000/api/v1/users/1/bins/1 -H 'Authorization: Bearer <JWT>'
+
+
 ## /pins
 
-# List a users' bins
+# List a users' pins
 $ curl -X GET http://localhost:4000/api/v1/users/1/bins/1/pins -H 'Authorization: Bearer <JWT>'
 
-# Get details of a bin
+# Get details of a pin
 $ curl -X GET http://localhost:4000/api/v1/users/1/bins/1/pins/1 -H 'Authorization: Bearer <JWT>'
 
-# Create a Bin
+# Create a pin
 $ curl -X POST http://localhost:4000/api/v1/users/1/bins/1/pins -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "my pin", "latitude": 39.9526, "longitude": -75.1652}}'
 
-# Update a bin
+# Update a pin
 $ curl -X PATCH http://localhost:4000/api/v1/users/1/bins/1/pins/1 -H 'Authorization: Bearer <JWT>' -d '{"bin": {"name": "new name"}}'
+
+# Delete a pin
+$ curl -X DELETE http://localhost:4000/api/v1/users/1/bins/1/pins/1 -H 'Authorization: Bearer <JWT>'
+
 
 ## /yelp
 
