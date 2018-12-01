@@ -44,7 +44,8 @@ defmodule PinBin.Mixfile do
       {:guardian, "~> 0.14"},
       {:excoveralls, "~> 0.6", only: :test},
       {:ex_machina, "~> 2.0"},
-      {:corsica, "~> 1.1"}
+      {:corsica, "~> 1.1"},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
     ]
   end
 
