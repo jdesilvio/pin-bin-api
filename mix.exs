@@ -4,7 +4,7 @@ defmodule PinBin.Mixfile do
   def project do
     [app: :pin_bin,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.7",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -12,7 +12,7 @@ defmodule PinBin.Mixfile do
      aliases: aliases(),
      deps: deps(),
      test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: ["coveralls": :test,
+     preferred_cli_env: [coveralls: :test,
                          "coveralls.detail": :test,
                          "coveralls.post": :test]]
   end
@@ -42,15 +42,17 @@ defmodule PinBin.Mixfile do
       {:poison, "~> 3.0"},
       {:comeonin, "~> 3.0"},
       {:guardian, "~> 0.14"},
-      {:excoveralls, "~> 0.6", only: :test},
+      {:excoveralls, "~> 0.10", only: :test},
       {:ex_machina, "~> 2.0"},
-      {:corsica, "~> 1.1"}
+      {:corsica, "~> 1.1"},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
+      {:plug, "~> 1.7.1"}
     ]
   end
 
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     test: ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

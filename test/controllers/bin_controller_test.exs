@@ -49,7 +49,7 @@ defmodule PinBinWeb.BinControllerTest do
     test "only lists current user's bins", %{conn: conn, user: user} do
       user2 = Factory.insert(:user)
       bin1 = Factory.insert(:bin, user: user)
-      bin2 = Factory.insert(:bin, user: user2)
+      _bin2 = Factory.insert(:bin, user: user2)
 
       path = user_bin_path(conn, :index, user)
       response =

@@ -6,7 +6,7 @@ defmodule PinBinWeb.AuthViewTest do
 
   @auth %{
     jwt: "ABC123!@#",
-    exp: 15000000,
+    exp: 15_000_000,
     token_type: "Bearer",
     resource: '/user/1'
   }

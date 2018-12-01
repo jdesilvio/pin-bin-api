@@ -14,6 +14,8 @@ defmodule PinBin.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       alias PinBin.Repo
@@ -26,10 +28,10 @@ defmodule PinBin.DataCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PinBin.Repo)
+    :ok = Sandbox.checkout(PinBin.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PinBin.Repo, {:shared, self()})
+      Sandbox.mode(PinBin.Repo, {:shared, self()})
     end
 
     :ok
@@ -58,7 +60,8 @@ defmodule PinBin.DataCase do
       true
   """
   def errors_on(struct, data) do
-    struct.__struct__.changeset(struct, data)
+    struct
+    |> struct.__struct__.changeset(data)
     |> Ecto.Changeset.traverse_errors(&PinBinWeb.ErrorHelpers.translate_error/1)
     |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
   end

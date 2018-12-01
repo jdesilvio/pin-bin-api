@@ -1,4 +1,8 @@
 defmodule PinBin.Factory do
+  @moduledoc"""
+  Factory to create database records for each model.
+  """
+
   use ExMachina.Ecto, repo: PinBin.Repo
 
   def user_factory do

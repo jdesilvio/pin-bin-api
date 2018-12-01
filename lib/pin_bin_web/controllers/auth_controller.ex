@@ -1,9 +1,6 @@
 defmodule PinBinWeb.AuthController do
   use PinBinWeb, :controller
 
-  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
-
-  alias PinBin.User
   alias PinBin.Accounts
 
   @token_type "Bearer"

@@ -1,4 +1,7 @@
 defmodule PinBinWeb.Auth do
+  @moduledoc"""
+  API authentication.
+  """
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
   alias PinBin.Accounts
@@ -16,7 +19,7 @@ defmodule PinBinWeb.Auth do
       user ->
         {:error, :unauthorized, conn}
       true ->
-        dummy_checkpw
+        dummy_checkpw()
         {:error, :not_found, conn}
     end
   end

@@ -1,4 +1,10 @@
 defmodule PinBin.Bin do
+  @moduledoc"""
+  Bin model.
+
+  A bin is a container for pins.
+  """
+
   use PinBinWeb, :model
 
   @required_fields ~w(name short_name)a
