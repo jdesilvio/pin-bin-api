@@ -1,15 +1,6 @@
 defmodule PinBinWeb.Router do
   use PinBinWeb, :router
 
-  ## Browser routing
-
-  scope "/", PinBinWeb do
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
-  end
-
-
-  ## API routing
-
   scope "/api/v1", PinBinWeb do
     pipe_through [:api]
 
