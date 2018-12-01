@@ -1,4 +1,8 @@
 defmodule PinBin.Accounts do
+  @moduledoc"""
+  Functions associated with user accounts.
+  """
+
   import Ecto.Query, warn: false
   alias PinBin.Repo
 

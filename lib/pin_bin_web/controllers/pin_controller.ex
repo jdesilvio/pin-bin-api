@@ -1,8 +1,8 @@
 defmodule PinBinWeb.PinController do
   use PinBinWeb, :controller
 
-  alias PinBin.Pin
   alias PinBin.Bin
+  alias PinBin.Pin
 
   plug PinBinWeb.AssignCurrentUser
 
@@ -72,7 +72,7 @@ defmodule PinBinWeb.PinController do
     end
   end
 
-  def delete(conn, %{"id" => id}, current_user) do
+  def delete(conn, %{"id" => id}, _current_user) do
     Pin |> Repo.get!(id) |> Repo.delete!
     send_resp(conn, :no_content, "")
   end

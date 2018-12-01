@@ -1,4 +1,9 @@
 defmodule PinBin.User do
+  @moduledoc"""
+  User model.
+
+  A user of the application.
+  """
   use PinBinWeb, :model
 
   @required_fields ~w(email username password)a

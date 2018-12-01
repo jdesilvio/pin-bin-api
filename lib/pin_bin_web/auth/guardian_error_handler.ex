@@ -1,4 +1,6 @@
 defmodule PinBinWeb.GuardianErrorHandler do
+  @moduledoc false
+
   import PinBinWeb.Router.Helpers
 
   #  def unauthenticated(conn, _params) do

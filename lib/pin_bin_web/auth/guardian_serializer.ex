@@ -1,4 +1,6 @@
 defmodule PinBinWeb.GuardianSerializer do
+  @moduledoc false
+
   @behaviour Guardian.Serializer
 
   alias PinBin.Repo

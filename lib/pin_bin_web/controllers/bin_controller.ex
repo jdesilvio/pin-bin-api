@@ -74,7 +74,7 @@ defmodule PinBinWeb.BinController do
     end
   end
 
-  def delete(conn, %{"id" => id}, current_user) do
+  def delete(conn, %{"id" => id}, _current_user) do
     Bin |> Repo.get!(id) |> Repo.delete!
     send_resp(conn, :no_content, "")
   end

@@ -22,7 +22,6 @@ defmodule PinBinWeb.Router do
     end
   end
 
-
   ## Pipelines
 
   pipeline :login_required do

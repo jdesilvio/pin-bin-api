@@ -1,4 +1,10 @@
 defmodule PinBin.Pin do
+  @moduledoc"""
+  Pin model.
+
+  A pin stores information about a place or location.
+  """
+
   use PinBinWeb, :model
 
   @required_fields ~w(name latitude longitude)a

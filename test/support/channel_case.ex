@@ -15,6 +15,8 @@ defmodule PinBinWeb.ChannelCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with channels
@@ -25,17 +27,16 @@ defmodule PinBinWeb.ChannelCase do
       import Ecto.Changeset
       import Ecto.Query
 
-
       # The default endpoint for testing
       @endpoint PinBinWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PinBin.Repo)
+    :ok = Sandbox.checkout(PinBin.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PinBin.Repo, {:shared, self()})
+      Sandbox.mode(PinBin.Repo, {:shared, self()})
     end
 
     :ok
