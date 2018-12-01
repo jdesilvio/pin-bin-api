@@ -2,8 +2,6 @@ defmodule PinBinWeb.AuthControllerTest do
   use PinBinWeb.ConnCase
 
   alias PinBin.Factory
-  alias PinBin.Repo
-  alias PinBin.User
 
   setup do
     user = Factory.insert(:user)

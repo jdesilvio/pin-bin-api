@@ -2,9 +2,7 @@ defmodule PinBinWeb.UserControllerTest do
   use PinBinWeb.ConnCase
 
   import Phoenix.ConnTest
-  alias PinBin.User
   alias PinBin.Factory
-  alias PinBin.Accounts
 
   @api_path "/api/v1"
 
