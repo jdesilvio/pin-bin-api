@@ -5,7 +5,6 @@ defmodule PinBinWeb.BinControllerTest do
   alias PinBin.Bin
   alias PinBin.Factory
 
-  @api_path "/api/v1"
   @valid_attrs %{"name" => "my bin", "is_public" => true}
 
   setup %{conn: conn} do
@@ -23,7 +22,7 @@ defmodule PinBinWeb.BinControllerTest do
       bin1 = Factory.insert(:bin, user: user)
       bin2 = Factory.insert(:bin, user: user)
 
-      path = @api_path <> user_bin_path(conn, :index, user)
+      path = user_bin_path(conn, :index, user)
       response =
         conn
         |> get(path)
@@ -52,7 +51,7 @@ defmodule PinBinWeb.BinControllerTest do
       bin1 = Factory.insert(:bin, user: user)
       bin2 = Factory.insert(:bin, user: user2)
 
-      path = @api_path <> user_bin_path(conn, :index, user)
+      path = user_bin_path(conn, :index, user)
       response =
         conn
         |> get(path)
@@ -75,7 +74,7 @@ defmodule PinBinWeb.BinControllerTest do
     test "create bin", %{conn: conn} do
       user = Factory.insert(:user)
 
-      path = @api_path <> user_bin_path(conn, :create, user, bin: @valid_attrs)
+      path = user_bin_path(conn, :create, user, bin: @valid_attrs)
       response =
         conn
         |> post(path)
@@ -90,7 +89,7 @@ defmodule PinBinWeb.BinControllerTest do
       user = Factory.insert(:user)
       bin = Factory.insert(:bin, user: user)
 
-      path = @api_path <> user_bin_path(conn, :show, user.id, bin.id)
+      path = user_bin_path(conn, :show, user.id, bin.id)
       response =
         conn
         |> get(path)
@@ -112,7 +111,7 @@ defmodule PinBinWeb.BinControllerTest do
       bin = Factory.insert(:bin, user: user)
       new_params = %{"name" => "new name"}
 
-      path = @api_path <> user_bin_path(conn, :update, user, bin.id, bin: new_params)
+      path = user_bin_path(conn, :update, user, bin.id, bin: new_params)
       response =
         conn
         |> patch(path)
@@ -133,7 +132,7 @@ defmodule PinBinWeb.BinControllerTest do
     test "delete bin", %{conn: conn, user: user} do
       bin = Factory.insert(:bin, user: user)
 
-      path =  @api_path <> user_bin_path(conn, :delete, user, bin)
+      path = user_bin_path(conn, :delete, user, bin)
       response =
         conn
         |> delete(path)

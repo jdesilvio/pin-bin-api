@@ -4,8 +4,6 @@ defmodule PinBinWeb.UserControllerTest do
   import Phoenix.ConnTest
   alias PinBin.Factory
 
-  @api_path "/api/v1"
-
   setup %{conn: conn} do
     user = Factory.insert(:user)
     {:ok, jwt, _} = Guardian.encode_and_sign(user)
@@ -38,14 +36,11 @@ defmodule PinBinWeb.UserControllerTest do
 
   describe "show/2" do
     test "show user", %{conn: conn, user: user} do
-      path = @api_path <> user_path(conn, :show, user.id)
-      IO.puts path
-      response = 
+      path = user_path(conn, :show, user.id)
+      response =
         conn
         |> get(path)
         |> json_response(200)
-
-      IO.inspect user
 
       assert response == %{
         "data" => %{
