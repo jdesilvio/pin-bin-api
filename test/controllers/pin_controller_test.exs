@@ -5,7 +5,6 @@ defmodule PinBinWeb.PinControllerTest do
   alias PinBin.Factory
   alias PinBin.Pin
 
-  @api_path "/api/v1"
   @valid_attrs %{latitude: "120.5", longitude: "120.5", name: "some pin"}
   @invalid_attrs %{latitude: nil, longitude: nil, name: nil}
 
@@ -24,7 +23,7 @@ defmodule PinBinWeb.PinControllerTest do
     test "lists pins", %{conn: conn, user: user, bin: bin} do
       pin = Factory.insert(:pin, user: user, bin: bin)
 
-      path = @api_path <> user_bin_pin_path(conn, :index, user, bin)
+      path = user_bin_pin_path(conn, :index, user, bin)
       response =
         conn
         |> get(path)
@@ -48,10 +47,10 @@ defmodule PinBinWeb.PinControllerTest do
 
       pin1 = Factory.insert(:pin, user: user, bin: bin1)
       pin2 = Factory.insert(:pin, user: user, bin: bin1)
-      pin3 = Factory.insert(:pin, user: user, bin: bin2)
-      pin4 = Factory.insert(:pin, user: user, bin: bin2)
+      _pin3 = Factory.insert(:pin, user: user, bin: bin2)
+      _pin4 = Factory.insert(:pin, user: user, bin: bin2)
 
-      path = @api_path <> user_bin_pin_path(conn, :index, user, bin1)
+      path = user_bin_pin_path(conn, :index, user, bin1)
       response =
         conn
         |> get(path)
@@ -66,7 +65,7 @@ defmodule PinBinWeb.PinControllerTest do
 
   describe "create/3" do
     test "new pin is created", %{conn: conn, user: user, bin: bin} do
-      path = @api_path <> user_bin_pin_path(conn, :create, user, bin, pin: @valid_attrs)
+      path = user_bin_pin_path(conn, :create, user, bin, pin: @valid_attrs)
       response =
         conn
         |> post(path)
@@ -79,7 +78,7 @@ defmodule PinBinWeb.PinControllerTest do
     end
 
     test "new pin is not created with invalid attributes", %{conn: conn, user: user, bin: bin} do
-      path = @api_path <> user_bin_pin_path(conn, :create, user, bin, pin: @invalid_attrs)
+      path = user_bin_pin_path(conn, :create, user, bin, pin: @invalid_attrs)
       response =
         conn
         |> post(path)
@@ -94,7 +93,7 @@ defmodule PinBinWeb.PinControllerTest do
     test "show pin", %{conn: conn, user: user, bin: bin} do
       pin = Factory.insert(:pin, user: user, bin: bin)
 
-      path = @api_path <> user_bin_pin_path(conn, :show, user, bin, pin)
+      path = user_bin_pin_path(conn, :show, user, bin, pin)
       response =
         conn
         |> get(path)
@@ -116,7 +115,7 @@ defmodule PinBinWeb.PinControllerTest do
       pin = Factory.insert(:pin, user: user, bin: bin)
       new_params = %{"name" => "new xxx name", "longitude" => 11}
 
-      path = @api_path <> user_bin_pin_path(conn, :update, user, bin.id, pin.id, pin: new_params)
+      path = user_bin_pin_path(conn, :update, user, bin.id, pin.id, pin: new_params)
       response =
         conn
         |> patch(path)
@@ -137,7 +136,7 @@ defmodule PinBinWeb.PinControllerTest do
     test "delete pin", %{conn: conn, user: user, bin: bin} do
       pin = Factory.insert(:pin, user: user, bin: bin)
 
-      path = @api_path <> user_bin_pin_path(conn, :delete, user, bin, pin)
+      path = user_bin_pin_path(conn, :delete, user, bin, pin)
       response =
         conn
         |> delete(path)

@@ -1,34 +1,6 @@
 defmodule PinBinWeb.Router do
   use PinBinWeb, :router
 
-  ## Browser routing
-
-  scope "/", PinBinWeb do
-    pipe_through [:browser, :with_session]
-
-    get "/", PageController, :index
-    get "/elm", ElmController, :index
-    resources "/users", UserController, only: [:new, :create]
-    resources "/sessions", SessionController, only: [:new, :create, :delete]
-
-    # Authenticated user
-    scope "/"  do
-      pipe_through [:login_required]
-
-      resources "/users", UserController, only: [:show], as: :user do
-        resources "/bins", BinController, as: :bin do
-          resources "/pins", PinController, as: :pin
-        end
-      end
-
-      get "/yelp", YelpController, :index
-      post "/yelp", YelpController, :index
-    end
-  end
-
-
-  ## API routing
-
   scope "/api/v1", PinBinWeb do
     pipe_through [:api]
 
@@ -53,20 +25,6 @@ defmodule PinBinWeb.Router do
 
   ## Pipelines
 
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-  end
-
-  pipeline :with_session do
-    plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.LoadResource
-    plug PinBinWeb.CurrentUser
-  end
-
   pipeline :login_required do
     plug Guardian.Plug.EnsureAuthenticated,
          handler: PinBinWeb.GuardianErrorHandler
@@ -79,7 +37,7 @@ defmodule PinBinWeb.Router do
   end
 
   pipeline :api_auth do
-    plug PinBinWeb.InspectConn #TODO remove <<<
+    # Placeholder
   end
 
 end

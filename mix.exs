@@ -14,15 +14,15 @@ defmodule PinBin.Mixfile do
      test_coverage: [tool: ExCoveralls],
      preferred_cli_env: ["coveralls": :test,
                          "coveralls.detail": :test,
-                         "coveralls.post": :test,
-                         "coveralls.html": :test]]
+                         "coveralls.post": :test]]
   end
 
   def application do
     [mod: {PinBin, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html,
-                    :cowboy, :logger, :gettext, :phoenix_ecto,
-                    :postgrex, :yelp_ex, :comeonin, :ex_machina]]
+     applications: [:phoenix, :phoenix_pubsub, :cowboy,
+                    :logger, :gettext, :phoenix_ecto,
+                    :postgrex, :yelp_ex, :comeonin,
+                    :ex_machina]]
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -34,8 +34,6 @@ defmodule PinBin.Mixfile do
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 3.3"},
       {:postgrex, "~> 0.13"},
-      {:phoenix_html, "~> 2.12"},
-      {:phoenix_live_reload, "~> 1.1", only: :dev},
       {:gettext, "~> 0.15"},
       {:cowboy, "~> 1.0"},
 
