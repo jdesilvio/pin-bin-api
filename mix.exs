@@ -35,7 +35,7 @@ defmodule PinBin.Mixfile do
       {:phoenix_ecto, "~> 3.3"},
       {:postgrex, "~> 0.13"},
       {:gettext, "~> 0.15"},
-      {:cowboy, "~> 1.0"},
+      {:plug_cowboy, "~> 1.0"},
 
       # Other deps
       {:yelp_ex, "~> 0.2.1"},
