@@ -10,20 +10,7 @@ config :pin_bin, PinBinWeb.Endpoint,
   http: [port: {:system, "PORT"}],
   debug_errors: true,
   code_reloader: true,
-  check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../assets", __DIR__)]]
-
-# Watch static and templates for browser reloading.
-config :pin_bin, PinBinWeb.Endpoint,
-  live_reload: [
-    patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
-      ~r{priv/gettext/.*(po)$},
-      ~r{lib/pin_bin_web/views/.*(ex)$},
-      ~r{lib/pin_bin_web/templates/.*(eex)$}
-    ]
-  ]
+  check_origin: false
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
