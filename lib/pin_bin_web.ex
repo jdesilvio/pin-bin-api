@@ -28,7 +28,7 @@ defmodule PinBinWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: PinBinWeb
+      use Phoenix.Controller, namespace: PinBinWeb, log: :info
 
       alias PinBin.Repo
       import Ecto
