@@ -46,7 +46,8 @@ defmodule PinBin.Mixfile do
       {:ex_machina, "~> 2.0"},
       {:corsica, "~> 1.1"},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
-      {:plug, "~> 1.7.1"}
+      {:plug, "~> 1.7.1"},
+      {:logger_file_backend, "~> 0.0.10"}
     ]
   end
 
