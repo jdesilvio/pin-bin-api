@@ -15,7 +15,7 @@ config :pin_bin, PinBinWeb.Endpoint,
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: :all
 
 # Guardian config
 config :guardian, Guardian,
