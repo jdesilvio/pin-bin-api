@@ -1,4 +1,6 @@
+# Application specific
 .env
+*.log
 
 # App artifacts
 /_build
