@@ -16,8 +16,35 @@ config :pin_bin, PinBinWeb.Endpoint,
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
-# Do not print debug messages in production
-config :logger, level: :info
+# Production logging
+config :logger,
+  backends: [:console,
+             {LoggerFileBackend, :info},
+             {LoggerFileBackend, :error}]
+
+config :logger, :info,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id,
+             :pid,
+             :application,
+             :module,
+             :file,
+             :function,
+             :line],
+  path: "./logs/info.log",
+  level: :info
+
+config :logger, :error,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id,
+             :pid,
+             :application,
+             :module,
+             :file,
+             :function,
+             :line],
+  path: "./logs/error.log",
+  level: :error
 
 # ## SSL Support
 #
