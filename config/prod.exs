@@ -13,8 +13,10 @@ use Mix.Config
 # which you typically run after static files are built.
 config :pin_bin, PinBinWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "157.230.85.152", port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  server: true,
+  code_reloader: false
 
 # Production logging
 config :logger,
@@ -82,6 +84,8 @@ config :logger, :error,
 #
 #     config :pin_bin, PinBinWeb.Endpoint, server: true
 #
+
+config :phoenix, :serve_endpoints, true
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
