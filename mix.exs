@@ -3,7 +3,7 @@ defmodule PinBin.Mixfile do
 
   def project do
     [app: :pin_bin,
-     version: "0.1.0-alpha-8",
+     version: "0.1.0-alpha-9",
      elixir: "~> 1.7",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
