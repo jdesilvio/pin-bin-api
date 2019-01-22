@@ -3,7 +3,7 @@ defmodule PinBin.Mixfile do
 
   def project do
     [app: :pin_bin,
-     version: "0.1.0-alpha-10",
+     version: "0.1.0-alpha-11",
      elixir: "~> 1.7",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -22,7 +22,8 @@ defmodule PinBin.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :cowboy,
                     :logger, :gettext, :phoenix_ecto,
                     :postgrex, :yelp_ex, :comeonin,
-                    :ex_machina, :edeliver, :plug_cowboy]]
+                    :ex_machina, :edeliver, :plug_cowboy,
+                    :guardian]]
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
