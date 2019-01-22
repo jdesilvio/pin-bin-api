@@ -14,7 +14,6 @@ use Mix.Config
 config :pin_bin, PinBinWeb.Endpoint,
   http: [port: 4000],
   url: [host: "pinbinapp.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   code_reloader: false
 
