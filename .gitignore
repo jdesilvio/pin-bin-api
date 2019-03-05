@@ -1,6 +1,7 @@
 # Application specific
 .env
 *.log
+.deliver/releases
 
 # App artifacts
 /_build
