@@ -12,6 +12,9 @@ AND a smart alert system** to tell me when I was close to one of them
 or present me with suggestions at times that I am likely to be looking
 for a place to eat, shop or hangout.
 
+**Add more stuff here**
+**Add even more stuff here**
+
 ---
 
 ## API Usage
